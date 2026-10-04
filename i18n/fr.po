@@ -645,8 +645,8 @@ msgstr "Nombre de factures"
 #. module: sales_bonus_grid
 #. odoo-python
 #: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
-msgid "Invoices for %(user)s (%(month)s)"
-msgstr "Factures de %(user)s (%(month)s)"
+msgid "Store Invoices (%(month)s)"
+msgstr "Factures du magasin (%(month)s)"
 
 #. module: sales_bonus_grid
 #: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__message_is_follower
@@ -748,8 +748,8 @@ msgstr "Mois"
 
 #. module: sales_bonus_grid
 #: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__revenue
-msgid "Month-to-Date Revenue"
-msgstr "Chiffre d'affaires du mois"
+msgid "Store Revenue"
+msgstr "Chiffre d'affaires du magasin"
 
 #. module: sales_bonus_grid
 #: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
@@ -968,8 +968,8 @@ msgstr "Base de chiffre d'affaires"
 
 #. module: sales_bonus_grid
 #: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
-msgid "Revenue So Far"
-msgstr "CA réalisé à ce jour"
+msgid "Store Revenue"
+msgstr "CA du magasin"
 
 #. module: sales_bonus_grid
 #: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__revenue_from

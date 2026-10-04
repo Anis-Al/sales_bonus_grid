@@ -78,7 +78,7 @@ class SalesBonusStatement(models.Model):
         index=True,
     )
     revenue = fields.Monetary(
-        string="Month-to-Date Revenue",
+        string="Store Revenue",
         compute='_compute_revenue_and_bonus',
         store=True,
         tracking=True,
@@ -179,10 +179,10 @@ class SalesBonusStatement(models.Model):
         for rec in self:
             rec.is_manager = is_mgr
 
-    @api.depends('user_id', 'company_id', 'date_month', 'grid_id.revenue_basis')
+    @api.depends('company_id', 'date_month', 'grid_id.revenue_basis')
     def _compute_invoice_count(self):
         for rec in self:
-            if not rec.user_id or not rec.date_month:
+            if not rec.company_id or not rec.date_month:
                 rec.invoice_count = 0
                 continue
             domain = rec._get_invoices_domain()
@@ -195,7 +195,6 @@ class SalesBonusStatement(models.Model):
         domain = [
             ('move_type', 'in', ('out_invoice', 'out_refund')),
             ('state', '=', 'posted'),
-            ('invoice_user_id', '=', self.user_id.id),
             ('company_id', '=', self.company_id.id),
             ('invoice_date', '>=', month_start),
             ('invoice_date', '<=', month_end),
@@ -376,7 +375,6 @@ class SalesBonusStatement(models.Model):
                     [
                         ('move_type', '=', 'out_refund'),
                         ('state', '=', 'posted'),
-                        ('invoice_user_id', '=', rec.user_id.id),
                         ('company_id', '=', rec.company_id.id),
                         ('invoice_date', '>=', min_start),
                         ('invoice_date', '<=', max_end),
@@ -494,8 +492,7 @@ class SalesBonusStatement(models.Model):
         self.ensure_one()
         domain = self._get_invoices_domain()
         action = {
-            'name': _("Invoices for %(user)s (%(month)s)",
-                      user=self.user_id.name,
+            'name': _("Store Invoices (%(month)s)",
                       month=self.date_month.strftime('%B %Y')),
             'type': 'ir.actions.act_window',
             'res_model': 'account.move',
@@ -503,7 +500,6 @@ class SalesBonusStatement(models.Model):
             'domain': domain,
             'context': {
                 'default_move_type': 'out_invoice',
-                'default_invoice_user_id': self.user_id.id,
                 'default_company_id': self.company_id.id,
             }
         }
@@ -571,7 +567,7 @@ class SalesBonusStatement(models.Model):
                 ('active', '=', True),
                 '|',
                 ('sale_team_id', '!=', False),
-                ('groups_id', 'in', self.env.ref('sales_team.group_sale_salesman').id)
+                ('group_ids', 'in', self.env.ref('sales_team.group_sale_salesman').id)
             ])
 
             invoice_users = self.env['account.move']._read_group([

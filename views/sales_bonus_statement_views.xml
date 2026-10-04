@@ -57,7 +57,7 @@
                     <div class="row g-3 mb-4">
                         <div class="col-md-3 col-sm-6">
                             <div class="card shadow-sm border-0 bg-light p-3 h-100 rounded-3 text-center">
-                                <div class="text-uppercase fw-bold text-muted small mb-1">Revenue So Far</div>
+                                <div class="text-uppercase fw-bold text-muted small mb-1">Store Revenue</div>
                                 <div class="fs-3 fw-bold text-dark">
                                     <field name="revenue" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                                 </div>
@@ -157,7 +157,7 @@
                 <field name="user_id"/>
                 <field name="company_id" groups="base.group_multi_company"/>
                 <field name="currency_id" invisible="1" optional="hide"/>
-                <field name="revenue" sum="Total Revenue" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="revenue" string="Store Revenue" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                 <field name="bonus" sum="Total Bonus" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                 <field name="current_line_id"/>
                 <field name="next_line_id" optional="show"/>
