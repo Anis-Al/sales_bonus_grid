@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sales_bonus_grid_salesman,sales.bonus.grid.salesman,model_sales_bonus_grid,sales_team.group_sale_salesman,1,0,0,0
+access_sales_bonus_grid_salesman_all,sales.bonus.grid.salesman_all,model_sales_bonus_grid,sales_team.group_sale_salesman_all_leads,1,0,0,0
+access_sales_bonus_grid_manager,sales.bonus.grid.manager,model_sales_bonus_grid,sales_team.group_sale_manager,1,1,1,1
+access_sales_bonus_grid_line_salesman,sales.bonus.grid.line.salesman,model_sales_bonus_grid_line,sales_team.group_sale_salesman,1,0,0,0
+access_sales_bonus_grid_line_salesman_all,sales.bonus.grid.line.salesman_all,model_sales_bonus_grid_line,sales_team.group_sale_salesman_all_leads,1,0,0,0
+access_sales_bonus_grid_line_manager,sales.bonus.grid.line.manager,model_sales_bonus_grid_line,sales_team.group_sale_manager,1,1,1,1
+access_sales_bonus_statement_salesman,sales.bonus.statement.salesman,model_sales_bonus_statement,sales_team.group_sale_salesman,1,0,0,0
+access_sales_bonus_statement_salesman_all,sales.bonus.statement.salesman_all,model_sales_bonus_statement,sales_team.group_sale_salesman_all_leads,1,0,0,0
+access_sales_bonus_statement_manager,sales.bonus.statement.manager,model_sales_bonus_statement,sales_team.group_sale_manager,1,1,1,1
+access_sales_bonus_unlock_wizard_manager,sales.bonus.unlock.wizard.manager,model_sales_bonus_unlock_wizard,sales_team.group_sale_manager,1,1,1,1

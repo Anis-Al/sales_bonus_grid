@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Server Action for "My Bonus" Personal Dashboard -->
+    <record id="action_sales_bonus_my_bonus_server" model="ir.actions.server">
+        <field name="name">My Bonus</field>
+        <field name="model_id" ref="model_sales_bonus_statement"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_open_my_bonus()</field>
+    </record>
+
+    <!-- My Bonus Form View (Dedicated Rich Personal View) -->
+    <record id="view_sales_bonus_statement_my_bonus_form" model="ir.ui.view">
+        <field name="name">sales.bonus.statement.my_bonus.form</field>
+        <field name="model">sales.bonus.statement</field>
+        <field name="arch" type="xml">
+            <form string="My Bonus" create="0">
+                <header>
+                    <button name="action_refresh" string="Refresh Figures" type="object" class="btn-primary" icon="fa-refresh" groups="sales_team.group_sale_manager" invisible="state == 'locked'"/>
+                    <button name="action_view_invoices" string="View Counted Invoices" type="object" class="btn-secondary" icon="fa-file-text-o"/>
+                    <button name="action_lock" string="Lock Statement" type="object" class="btn-warning" groups="sales_team.group_sale_manager" invisible="state == 'locked'"/>
+                    <button name="action_unlock" string="Unlock Statement" type="object" class="btn-outline-danger" groups="sales_team.group_sale_manager" invisible="state == 'open'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="open,locked"/>
+                </header>
+                <sheet>
+                    <field name="is_manager" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="grid_id" invisible="1"/>
+                    <field name="current_line_id" invisible="1"/>
+                    <field name="next_line_id" invisible="1"/>
+
+                    <!-- Late Credit Note Warning Alert -->
+                    <div class="alert alert-danger d-flex align-items-center mb-3" role="alert" invisible="not late_credit_note_warning">
+                        <i class="fa fa-exclamation-circle fa-2x me-3" title="Warning"/>
+                        <div>
+                            <strong>Late Credit Notes Notice:</strong>
+                            <field name="late_credit_note_warning" readonly="1" class="d-block"/>
+                        </div>
+                    </div>
+
+                    <!-- Locked Notice -->
+                    <div class="alert alert-info mb-3" role="alert" invisible="state == 'open'">
+                        <i class="fa fa-lock me-2" title="Locked"/>
+                        This statement was <strong>locked</strong> on <field name="locked_on" readonly="1"/> by <field name="locked_by" readonly="1"/>.
+                        Figures are frozen and finalized.
+                        <div invisible="not unlock_reason" class="mt-1 text-muted">
+                            <em>Previous unlock note: <field name="unlock_reason" readonly="1"/></em>
+                        </div>
+                    </div>
+
+                    <div class="oe_title">
+                        <h2 class="text-primary mb-1">
+                            <field name="name" readonly="1"/>
+                        </h2>
+                        <div class="text-muted mb-3">
+                            <span>Salesperson: <strong><field name="user_id" readonly="1" options="{'no_open': True}"/></strong></span>
+                            <span class="ms-3" groups="base.group_multi_company">Company: <strong><field name="company_id" readonly="1" options="{'no_open': True}"/></strong></span>
+                            <span class="ms-3">Month: <strong><field name="date_month" readonly="1" widget="month_picker"/></strong></span>
+                        </div>
+                    </div>
+
+                    <!-- Main Metric Stat Cards -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card shadow-sm border-0 bg-light p-3 h-100 rounded-3 text-center">
+                                <div class="text-uppercase fw-bold text-muted small mb-1">Revenue So Far</div>
+                                <div class="fs-3 fw-bold text-dark">
+                                    <field name="revenue" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </div>
+                                <div class="small text-muted mt-1">
+                                    <field name="invoice_count"/> posted invoice(s)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card shadow-sm border-0 p-3 h-100 rounded-3 text-center text-white" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);">
+                                <div class="text-uppercase fw-semibold small mb-1 opacity-75">Bonus Earned</div>
+                                <div class="fs-2 fw-bolder">
+                                    <field name="bonus" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </div>
+                                <div class="small opacity-75 mt-1">
+                                    Live calculation
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card shadow-sm border-0 bg-light p-3 h-100 rounded-3 text-center">
+                                <div class="text-uppercase fw-bold text-muted small mb-1">Current Tier</div>
+                                <div class="fs-4 fw-bold text-success">
+                                    <field name="current_line_id" options="{'no_open': True}"/>
+                                </div>
+                                <div class="small text-muted mt-1">
+                                    Active bonus bracket
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card shadow-sm border-0 bg-light p-3 h-100 rounded-3 text-center">
+                                <div class="text-uppercase fw-bold text-muted small mb-1">Target Tier</div>
+                                <div class="fs-4 fw-bold text-info">
+                                    <span invisible="not next_line_id"><field name="next_line_id" options="{'no_open': True}"/></span>
+                                    <span invisible="next_line_id" class="text-success">Top Tier!</span>
+                                </div>
+                                <div class="small text-muted mt-1" invisible="not next_line_id">
+                                    Need: <field name="remaining_to_next" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </div>
+                                <div class="small text-success mt-1" invisible="next_line_id">
+                                    Maximum tier reached
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar & Caption Section -->
+                    <div class="card shadow-sm border-0 mb-4 p-3 rounded-3 bg-light">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="fw-bold text-secondary">
+                                <i class="fa fa-line-chart me-1"/> Progress to Next Tier
+                            </span>
+                        </div>
+                        <div class="mb-2">
+                            <field name="progress" widget="progressbar"/>
+                        </div>
+                        <div class="text-muted small">
+                            <i class="fa fa-info-circle me-1" title="Info"/>
+                            <strong><field name="progress_caption" readonly="1"/></strong>
+                        </div>
+                    </div>
+
+                    <!-- Bonus Grid Tiers Table with Dynamic Row Highlights -->
+                    <div class="mb-4">
+                        <h4 class="text-secondary mb-3">
+                            <i class="fa fa-table me-2"/>Monthly Bonus Grid Tiers
+                        </h4>
+                        <field name="grid_line_ids" readonly="1" mode="list" options="{'no_open': True}">
+                            <list string="Bonus Grid Tiers" create="0" delete="0" edit="0" no_open="True"
+                                  decoration-success="id == parent.current_line_id"
+                                  decoration-bf="id == parent.current_line_id"
+                                  decoration-info="id == parent.next_line_id">
+                                <field name="currency_id" column_invisible="1"/>
+                                <field name="sequence" widget="handle"/>
+                                <field name="name" string="Tier Level"/>
+                                <field name="revenue_from" string="From Revenue" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <field name="revenue_to" string="Up To Revenue" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <field name="bonus_value" string="Bonus Amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </list>
+                        </field>
+                    </div>
+
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Manager List View: sales.bonus.statement -->
+    <record id="view_sales_bonus_statement_list" model="ir.ui.view">
+        <field name="name">sales.bonus.statement.list</field>
+        <field name="model">sales.bonus.statement</field>
+        <field name="arch" type="xml">
+            <list string="Team Bonuses" create="0" decoration-muted="state == 'locked'">
+                <field name="date_month" widget="month_picker"/>
+                <field name="user_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="currency_id" invisible="1" optional="hide"/>
+                <field name="revenue" sum="Total Revenue" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="bonus" sum="Total Bonus" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="current_line_id"/>
+                <field name="next_line_id" optional="show"/>
+                <field name="remaining_to_next" optional="hide"/>
+                <field name="progress" widget="progressbar"/>
+                <field name="state" widget="badge" decoration-success="state == 'open'" decoration-info="state == 'locked'" optional="hide"/>
+                <field name="last_refresh" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Pivot View: sales.bonus.statement -->
+    <record id="view_sales_bonus_statement_pivot" model="ir.ui.view">
+        <field name="name">sales.bonus.statement.pivot</field>
+        <field name="model">sales.bonus.statement</field>
+        <field name="arch" type="xml">
+            <pivot string="Team Bonuses Analysis" sample="1">
+                <field name="user_id" type="row"/>
+                <field name="date_month" type="col" interval="month"/>
+                <field name="revenue" type="measure"/>
+                <field name="bonus" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Graph View: sales.bonus.statement -->
+    <record id="view_sales_bonus_statement_graph" model="ir.ui.view">
+        <field name="name">sales.bonus.statement.graph</field>
+        <field name="model">sales.bonus.statement</field>
+        <field name="arch" type="xml">
+            <graph string="Team Bonuses" type="bar" sample="1">
+                <field name="user_id"/>
+                <field name="bonus" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Search View: sales.bonus.statement -->
+    <record id="view_sales_bonus_statement_search" model="ir.ui.view">
+        <field name="name">sales.bonus.statement.search</field>
+        <field name="model">sales.bonus.statement</field>
+        <field name="arch" type="xml">
+            <search string="Search Statements">
+                <field name="user_id"/>
+                <field name="date_month"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <separator/>
+                <filter name="my_statements" string="My Statements" domain="[('user_id', '=', uid)]"/>
+                <separator/>
+                <filter name="open_statements" string="Open" domain="[('state', '=', 'open')]"/>
+                <filter name="locked_statements" string="Locked" domain="[('state', '=', 'locked')]"/>
+                <separator/>
+                <group>
+                    <filter name="group_by_salesperson" string="Salesperson" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_by_month" string="Month" context="{'group_by': 'date_month:month'}"/>
+                    <filter name="group_by_company" string="Company" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                    <filter name="group_by_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_by_tier" string="Current Tier" context="{'group_by': 'current_line_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action: Manager Team Bonuses -->
+    <record id="action_sales_bonus_statement_manager" model="ir.actions.act_window">
+        <field name="name">Team Bonuses</field>
+        <field name="res_model">sales.bonus.statement</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+        <field name="context">{'create': False}</field>
+        <field name="search_view_id" ref="view_sales_bonus_statement_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No bonus statements generated yet.
+            </p>
+            <p>
+                Statements are automatically generated each month for active salespeople
+                according to the company's bonus grid rules.
+            </p>
+        </field>
+    </record>
+</odoo>

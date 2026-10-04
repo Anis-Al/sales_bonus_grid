@@ -1,0 +1,20 @@
+/* Sales Bonus Tracker UI styling */
+.o_sales_bonus_card {
+    border-radius: 0.75rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.o_sales_bonus_card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08) !important;
+}
+
+.o_sales_bonus_hero {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+}
+
+.o_tier_current_row {
+    background-color: rgba(25, 135, 84, 0.12) !important;
+    font-weight: bold;
+}

@@ -1,0 +1,1290 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sales_bonus_grid
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e-20260724\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-04 10:48+0000\n"
+"PO-Revision-Date: 2026-10-04 10:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid ""
+"%(count)d late credit note(s) totaling %(total)s were posted for locked "
+"month %(month)s after lock date."
+msgstr ""
+"%(count)d avoir(s) tardif(s) pour un total de %(total)s ont été enregistrés "
+"pour le mois verrouillé %(month)s après la date de verrouillage."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid ""
+"%(remaining)s more to reach %(tier)s — bonus goes from %(current_bonus)s to "
+"%(next_bonus)s"
+msgstr ""
+"%(remaining)s de plus pour atteindre %(tier)s — la prime passe de %(current_bonus)s à "
+"%(next_bonus)s"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid ""
+".\n"
+"                        Figures are frozen and finalized."
+msgstr ""
+".\n"
+"                        Les chiffres sont figés et définitifs."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/wizard/sales_bonus_unlock_wizard.py:0
+msgid ""
+"<b>Statement Unlocked</b> by %(user)s on %(date)s.<br/><b>Reason:</b> "
+"%(reason)s"
+msgstr ""
+"<b>Relevé déverrouillé</b> par %(user)s le %(date)s.<br/><b>Motif :</b> "
+"%(reason)s"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "<i class=\"fa fa-exclamation-circle fa-2x me-3\" title=\"Warning\"/>"
+msgstr "<i class=\"fa fa-exclamation-circle fa-2x me-3\" title=\"Avertissement\"/>"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_unlock_wizard_form
+msgid ""
+"<i class=\"fa fa-exclamation-triangle me-2\"/>\n"
+"                    Unlocking a closed statement allows revenue and bonus figures to be modified and recalculated.\n"
+"                    A mandatory audit note will be logged in the statement's chatter."
+msgstr ""
+"<i class=\"fa fa-exclamation-triangle me-2\"/>\n"
+"                    Déverrouiller un relevé clôturé permet de modifier et de recalculer le chiffre d'affaires et les primes.\n"
+"                    Une note d'audit obligatoire sera enregistrée dans le fil du relevé."
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_form
+msgid ""
+"<i class=\"fa fa-lock me-2\" title=\"Locked\"/>\n"
+"                        <strong>This month is locked.</strong> Grid tiers and settings cannot be edited while statements are closed."
+msgstr ""
+"<i class=\"fa fa-lock me-2\" title=\"Verrouillé\"/>\n"
+"                        <strong>Ce mois est verrouillé.</strong> Les paliers et paramètres de la grille ne peuvent pas être modifiés tant que les relevés sont clôturés."
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid ""
+"<i class=\"fa fa-lock me-2\" title=\"Locked\"/>\n"
+"                        This statement was <strong>locked</strong> on"
+msgstr ""
+"<i class=\"fa fa-lock me-2\" title=\"Verrouillé\"/>\n"
+"                        Ce relevé a été <strong>verrouillé</strong> le"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "<i class=\"fa fa-table me-2\"/>Monthly Bonus Grid Tiers"
+msgstr "<i class=\"fa fa-table me-2\"/>Paliers de la grille de primes mensuelle"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid ""
+"<span class=\"fw-bold text-secondary\">\n"
+"                                <i class=\"fa fa-line-chart me-1\"/> Progress to Next Tier\n"
+"                            </span>"
+msgstr ""
+"<span class=\"fw-bold text-secondary\">\n"
+"                                <i class=\"fa fa-line-chart me-1\"/> Progression vers le palier suivant\n"
+"                            </span>"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "<span invisible=\"next_line_id\" class=\"text-success\">Top Tier!</span>"
+msgstr "<span invisible=\"next_line_id\" class=\"text-success\">Palier maximum !</span>"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "<strong>Late Credit Notes Notice:</strong>"
+msgstr "<strong>Avertissement avoirs tardifs :</strong>"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid.py:0
+msgid "A bonus grid must contain at least one tier line."
+msgstr "Une grille de primes doit contenir au moins un palier."
+
+#. module: sales_bonus_grid
+#: model:ir.model.constraint,message:sales_bonus_grid.constraint_sales_bonus_statement_unique_user_month_company
+msgid "A salesperson can only have one bonus statement per company per month!"
+msgstr "Un commercial ne peut avoir qu'un seul relevé de primes par société et par mois !"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/wizard/sales_bonus_unlock_wizard.py:0
+msgid "A valid reason is required to unlock a closed bonus statement."
+msgstr "Un motif valide est requis pour déverrouiller un relevé de primes clôturé."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__message_needaction
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__message_needaction
+msgid "Action Needed"
+msgstr "Action requise"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__active
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_search
+msgid "Active"
+msgstr "Actif"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Active bonus bracket"
+msgstr "Tranche de prime active"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__activity_ids
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__activity_ids
+msgid "Activities"
+msgstr "Activités"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__activity_exception_decoration
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Décoration d'exception d'activité"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__activity_state
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__activity_state
+msgid "Activity State"
+msgstr "État de l'activité"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__activity_type_icon
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icône du type d'activité"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_search
+msgid "Archived"
+msgstr "Archivé"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__message_attachment_count
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_res_company__bonus_auto_refresh
+msgid "Auto Refresh Open Statements"
+msgstr "Actualisation automatique des relevés ouverts"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_res_config_settings__bonus_auto_refresh
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.res_config_settings_view_form_sales_bonus
+msgid "Auto Refresh Statements"
+msgstr "Actualisation automatique des relevés"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid "Automatically locked by scheduled closing job on %(date)s."
+msgstr "Verrouillé automatiquement par la tâche de clôture planifiée le %(date)s."
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.res_config_settings_view_form_sales_bonus
+msgid "Automatically recalculate open statements every hour via cron."
+msgstr "Recalculer automatiquement les relevés ouverts chaque heure via le planificateur."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_res_config_settings__bonus_auto_refresh
+msgid "Automatically recalculate open statements every hour."
+msgstr "Recalculer automatiquement les relevés ouverts chaque heure."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__bonus_value
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Bonus Amount"
+msgstr "Montant de la prime"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Bonus Earned"
+msgstr "Prime gagnée"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__grid_id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__grid_id
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_form
+msgid "Bonus Grid"
+msgstr "Grille de primes"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid.py:0
+msgid "Bonus Grid - %(month)s"
+msgstr "Grille de primes - %(month)s"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Bonus Grid Tiers"
+msgstr "Paliers de la grille de primes"
+
+#. module: sales_bonus_grid
+#: model:ir.actions.act_window,name:sales_bonus_grid.action_sales_bonus_grid
+#: model:ir.ui.menu,name:sales_bonus_grid.menu_sales_bonus_grid_config
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_list
+msgid "Bonus Grids"
+msgstr "Grilles de primes"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid "Bonus Grids Setup"
+msgstr "Configuration des grilles de primes"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_res_company__bonus_lock_day
+msgid "Bonus Lock Day of Month"
+msgstr "Jour de verrouillage des primes dans le mois"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid "Bonus Statement - %(user)s - %(month)s"
+msgstr "Relevé de primes - %(user)s - %(month)s"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__line_ids
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_form
+msgid "Bonus Tiers"
+msgstr "Paliers de prime"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__bonus_type
+msgid "Bonus Type"
+msgstr "Type de prime"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid_line.py:0
+msgid "Bonus percentage cannot exceed 100%."
+msgstr "Le pourcentage de prime ne peut pas dépasser 100 %."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid "Bonus statement updated with latest invoice figures."
+msgstr "Relevé de primes mis à jour avec les derniers chiffres de facturation."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid.py:0
+msgid ""
+"Bonus tier thresholds must be strictly ascending with no duplicates. Tier "
+"'%(curr)s' (%(curr_val)s) is not lower than '%(next)s' (%(next_val)s)."
+msgstr ""
+"Les seuils des paliers de prime doivent être strictement croissants sans doublons. Le palier "
+"'%(curr)s' (%(curr_val)s) n'est pas inférieur à '%(next)s' (%(next_val)s)."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid_line.py:0
+msgid "Bonus value cannot be negative."
+msgstr "La valeur de la prime ne peut pas être négative."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__mode
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_search
+msgid "Calculation Mode"
+msgstr "Mode de calcul"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_unlock_wizard_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid.py:0
+msgid "Cannot delete locked bonus grid for %(month)s."
+msgstr "Impossible de supprimer la grille de primes verrouillée pour %(month)s."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid_line.py:0
+msgid "Cannot delete tier lines from locked bonus grid '%(grid)s'."
+msgstr "Impossible de supprimer des lignes de palier de la grille de primes verrouillée '%(grid)s'."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid.py:0
+msgid ""
+"Cannot modify the bonus grid for %(month)s because it is locked. An "
+"administrator must unlock the relevant statements first."
+msgstr ""
+"Impossible de modifier la grille de primes pour %(month)s car elle est verrouillée. Un "
+"administrateur doit d'abord déverrouiller les relevés concernés."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid_line.py:0
+msgid "Cannot modify tier lines of locked bonus grid '%(grid)s'."
+msgstr "Impossible de modifier les lignes de palier de la grille de primes verrouillée '%(grid)s'."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields.selection,name:sales_bonus_grid.selection__res_company__bonus_default_mode__cliff
+#: model:ir.model.fields.selection,name:sales_bonus_grid.selection__sales_bonus_grid__mode__cliff
+msgid "Cliff"
+msgstr "Par palier (Cliff)"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_search
+msgid "Cliff Mode"
+msgstr "Mode Palier (Cliff)"
+
+#. module: sales_bonus_grid
+#: model:ir.model,name:sales_bonus_grid.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__company_id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__company_id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__company_id
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_search
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_search
+msgid "Company"
+msgstr "Société"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Company:"
+msgstr "Société :"
+
+#. module: sales_bonus_grid
+#: model:ir.model,name:sales_bonus_grid.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.actions.act_window,help:sales_bonus_grid.action_sales_bonus_grid
+msgid ""
+"Configure monthly revenue thresholds and corresponding bonus amounts or percentages.\n"
+"                New months will automatically inherit the previous month's tiers if not customized."
+msgstr ""
+"Configurez les seuils de chiffre d'affaires mensuels et les montants ou pourcentages de prime correspondants.\n"
+"                Les nouveaux mois hériteront automatiquement des paliers du mois précédent s'ils ne sont pas personnalisés."
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_unlock_wizard_form
+msgid "Confirm Unlock"
+msgstr "Confirmer le déverrouillage"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.actions.act_window,help:sales_bonus_grid.action_sales_bonus_grid
+msgid "Create your first monthly bonus grid!"
+msgstr "Créez votre première grille de primes mensuelle !"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__create_uid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__create_uid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__create_uid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_unlock_wizard__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__create_date
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__create_date
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__create_date
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_unlock_wizard__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__currency_id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__currency_id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__current_line_id
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_search
+msgid "Current Tier"
+msgstr "Palier actuel"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_res_config_settings__bonus_lock_day
+msgid "Day of month to freeze and lock statements from the previous month."
+msgstr "Jour du mois pour geler et verrouiller les relevés du mois précédent."
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.res_config_settings_view_form_sales_bonus
+msgid ""
+"Day of the following month (1-28) when previous month statements are "
+"automatically locked."
+msgstr ""
+"Jour du mois suivant (1-28) auquel les relevés du mois précédent sont "
+"verrouillés automatiquement."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_res_company__bonus_lock_day
+msgid ""
+"Day of the following month on which open bonus statements are automatically "
+"locked (1-28)."
+msgstr ""
+"Jour du mois suivant auquel les relevés de primes ouverts sont verrouillés "
+"automatiquement (1-28)."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_res_company__bonus_default_mode
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_res_config_settings__bonus_default_mode
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.res_config_settings_view_form_sales_bonus
+msgid "Default Calculation Mode"
+msgstr "Mode de calcul par défaut"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_res_company__bonus_default_revenue_basis
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_res_config_settings__bonus_default_revenue_basis
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.res_config_settings_view_form_sales_bonus
+msgid "Default Revenue Basis"
+msgstr "Base de CA par défaut"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_res_company__bonus_default_mode
+msgid "Default calculation mode used when creating new monthly bonus grids."
+msgstr "Mode de calcul par défaut utilisé lors de la création de nouvelles grilles de primes mensuelles."
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.res_config_settings_view_form_sales_bonus
+msgid ""
+"Default calculation rule (Cliff or Progressive) for newly generated monthly "
+"grids."
+msgstr ""
+"Règle de calcul par défaut (Palier ou Progressif) pour les grilles mensuelles "
+"générées automatiquement."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_res_config_settings__bonus_default_mode
+msgid "Default mode (Cliff or Progressive) for newly generated bonus grids."
+msgstr "Mode par défaut (Palier ou Progressif) pour les nouvelles grilles de primes."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_res_config_settings__bonus_default_revenue_basis
+msgid "Default revenue basis for newly generated bonus grids."
+msgstr "Base de CA par défaut pour les nouvelles grilles de primes."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_res_company__bonus_default_revenue_basis
+msgid "Default revenue basis used when creating new monthly bonus grids."
+msgstr "Base de CA par défaut utilisée lors de la création de nouvelles grilles de primes mensuelles."
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.res_config_settings_view_form_sales_bonus
+msgid "Default revenue recognition mode for newly generated monthly grids."
+msgstr "Mode de reconnaissance du CA par défaut pour les nouvelles grilles mensuelles."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_res_company__display_name
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__display_name
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__display_name
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__display_name
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_unlock_wizard__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__bonus
+msgid "Earned Bonus"
+msgstr "Prime acquise"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_res_company__bonus_auto_refresh
+msgid "Enable hourly background refresh for open monthly bonus statements."
+msgstr "Activer l'actualisation automatique toutes les heures pour les relevés de primes ouverts."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields.selection,name:sales_bonus_grid.selection__sales_bonus_grid_line__bonus_type__fixed
+msgid "Fixed Amount"
+msgstr "Montant fixe"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__message_follower_ids
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__message_partner_ids
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (Partenaires)"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_grid__activity_type_icon
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_statement__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icône Font Awesome, ex. fa-tasks"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "From Revenue"
+msgstr "À partir du CA"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__grid_mode
+msgid "Grid Mode"
+msgstr "Mode de grille"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__name
+msgid "Grid Name"
+msgstr "Nom de la grille"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__grid_line_ids
+msgid "Grid Tiers"
+msgstr "Paliers de la grille"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid.py:0
+msgid ""
+"Grid automatically created for %(month)s by copying previous grid "
+"'%(source)s'."
+msgstr ""
+"Grille créée automatiquement pour %(month)s en copiant la grille précédente "
+"'%(source)s'."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__has_message
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__has_message
+msgid "Has Message"
+msgstr "A un message"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_res_company__id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_res_config_settings__id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_unlock_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__activity_exception_icon
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__activity_exception_icon
+msgid "Icon"
+msgstr "Icône"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_grid__activity_exception_icon
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_statement__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icône pour signaler une activité en exception."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_grid__message_needaction
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_statement__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si coché, de nouveaux messages requièrent votre attention."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_grid__message_has_error
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_grid__message_has_sms_error
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_statement__message_has_error
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_statement__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si coché, certains messages ont une erreur d'envoi."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid.py:0
+msgid ""
+"In Progressive calculation mode, all bonus tiers must use 'Percentage (%%)' "
+"bonus type."
+msgstr ""
+"En mode de calcul Progressif, tous les paliers de prime doivent utiliser le type "
+"'Pourcentage (%%)' ."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__source_grid_id
+msgid "Inherited From"
+msgstr "Hérité de"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields.selection,name:sales_bonus_grid.selection__res_company__bonus_default_revenue_basis__invoiced
+#: model:ir.model.fields.selection,name:sales_bonus_grid.selection__sales_bonus_grid__revenue_basis__invoiced
+msgid "Invoiced (Posted Invoices)"
+msgstr "Facturé (Factures comptabilisées)"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_search
+msgid "Invoiced Basis"
+msgstr "Base facturée"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__invoice_count
+msgid "Invoices Count"
+msgstr "Nombre de factures"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid "Invoices for %(user)s (%(month)s)"
+msgstr "Factures de %(user)s (%(month)s)"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__message_is_follower
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__message_is_follower
+msgid "Is Follower"
+msgstr "Est abonné"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__is_locked
+msgid "Is Month Locked"
+msgstr "Mois verrouillé"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__is_manager
+msgid "Is Sales Manager"
+msgstr "Est responsable des ventes"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__last_refresh
+msgid "Last Refreshed"
+msgstr "Dernière actualisation"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__write_uid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__write_uid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__write_uid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_unlock_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Dernière modification par"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__write_date
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__write_date
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__write_date
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_unlock_wizard__write_date
+msgid "Last Updated on"
+msgstr "Dernière modification le"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__late_credit_note_warning
+msgid "Late Credit Notes Notice"
+msgstr "Avertissement avoirs tardifs"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Live calculation"
+msgstr "Calcul en temps réel"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Lock Statement"
+msgstr "Verrouiller le relevé"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields.selection,name:sales_bonus_grid.selection__sales_bonus_statement__state__locked
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_search
+msgid "Locked"
+msgstr "Verrouillé"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__locked_by
+msgid "Locked By"
+msgstr "Verrouillé par"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__locked_on
+msgid "Locked On"
+msgstr "Verrouillé le"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_unlock_wizard__reason
+msgid "Mandatory Reason for Unlocking"
+msgstr "Motif obligatoire de déverrouillage"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Maximum tier reached"
+msgstr "Palier maximum atteint"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__message_has_error
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur d'envoi du message"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__message_ids
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__message_ids
+msgid "Messages"
+msgstr "Messages"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__date_month
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_unlock_wizard__date_month
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_search
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_search
+msgid "Month"
+msgstr "Mois"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__revenue
+msgid "Month-to-Date Revenue"
+msgstr "Chiffre d'affaires du mois"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Month:"
+msgstr "Mois :"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.res_config_settings_view_form_sales_bonus
+msgid "Monthly Statement Lock Day"
+msgstr "Jour de verrouillage des relevés mensuels"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__my_activity_date_deadline
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Échéance de mon activité"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+#: model:ir.actions.server,name:sales_bonus_grid.action_sales_bonus_my_bonus_server
+#: model:ir.ui.menu,name:sales_bonus_grid.menu_sales_bonus_my_bonus
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "My Bonus"
+msgstr "Mes Primes"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_search
+msgid "My Statements"
+msgstr "Mes relevés"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Need:"
+msgstr "Besoin :"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid.py:0
+msgid "New Bonus Grid"
+msgstr "Nouvelle grille de primes"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid "New Bonus Statement"
+msgstr "Nouveau relevé de primes"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__activity_calendar_event_id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "Prochain événement agenda"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__activity_date_deadline
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Échéance de la prochaine activité"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__activity_summary
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__activity_summary
+msgid "Next Activity Summary"
+msgstr "Résumé de la prochaine activité"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__activity_type_id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__activity_type_id
+msgid "Next Activity Type"
+msgstr "Type de la prochaine activité"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__next_line_id
+msgid "Next Tier"
+msgstr "Palier suivant"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__next_bonus
+msgid "Next Tier Bonus"
+msgstr "Prime du palier suivant"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.actions.act_window,help:sales_bonus_grid.action_sales_bonus_statement_manager
+msgid "No bonus statements generated yet."
+msgstr "Aucun relevé de primes généré pour l'instant."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__message_needaction_counter
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__message_has_error_counter
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'erreurs"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_grid__message_needaction_counter
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_statement__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Nombre de messages nécessitant une action"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_grid__message_has_error_counter
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_statement__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec une erreur d'envoi"
+
+#. module: sales_bonus_grid
+#: model:ir.model.constraint,message:sales_bonus_grid.constraint_sales_bonus_grid_unique_company_month
+msgid "Only one bonus grid is allowed per company per month!"
+msgstr "Une seule grille de primes est autorisée par société et par mois !"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid "Only sales managers can lock bonus statements."
+msgstr "Seuls les responsables des ventes peuvent verrouiller les relevés de primes."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+#: code:addons/sales_bonus_grid/wizard/sales_bonus_unlock_wizard.py:0
+msgid "Only sales managers can unlock bonus statements."
+msgstr "Seuls les responsables des ventes peuvent déverrouiller les relevés de primes."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields.selection,name:sales_bonus_grid.selection__sales_bonus_statement__state__open
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_search
+msgid "Open"
+msgstr "Ouvert"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields.selection,name:sales_bonus_grid.selection__res_company__bonus_default_revenue_basis__paid
+#: model:ir.model.fields.selection,name:sales_bonus_grid.selection__sales_bonus_grid__revenue_basis__paid
+msgid "Paid (Collected Invoices)"
+msgstr "Payé (Factures encaissées)"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_search
+msgid "Paid Basis"
+msgstr "Base encaissée"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields.selection,name:sales_bonus_grid.selection__sales_bonus_grid_line__bonus_type__percent
+msgid "Percentage (%)"
+msgstr "Pourcentage (%)"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_unlock_wizard__reason
+msgid "Please explain why this locked monthly statement needs to be reopened."
+msgstr "Veuillez expliquer pourquoi ce relevé mensuel verrouillé doit être rouvert."
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Previous unlock note:"
+msgstr "Note de déverrouillage précédente :"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__progress_caption
+msgid "Progress Description"
+msgstr "Description de la progression"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__progress
+msgid "Progress to Next Tier (%)"
+msgstr "Progression vers le palier suivant (%)"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields.selection,name:sales_bonus_grid.selection__res_company__bonus_default_mode__progressive
+#: model:ir.model.fields.selection,name:sales_bonus_grid.selection__sales_bonus_grid__mode__progressive
+msgid "Progressive"
+msgstr "Progressif"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_search
+msgid "Progressive Mode"
+msgstr "Mode Progressif"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__rating_ids
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__rating_ids
+msgid "Ratings"
+msgstr "Évaluations"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Refresh Figures"
+msgstr "Actualiser les chiffres"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid "Refreshed"
+msgstr "Actualisé"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__remaining_to_next
+msgid "Remaining to Next Tier"
+msgstr "Reste à réaliser pour le palier suivant"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__activity_user_id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__activity_user_id
+msgid "Responsible User"
+msgstr "Utilisateur responsable"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__revenue_basis
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__grid_revenue_basis
+msgid "Revenue Basis"
+msgstr "Base de chiffre d'affaires"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Revenue So Far"
+msgstr "CA réalisé à ce jour"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__revenue_from
+msgid "Revenue Threshold"
+msgstr "Seuil de chiffre d'affaires"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid_line.py:0
+msgid "Revenue threshold cannot be negative."
+msgstr "Le seuil de chiffre d'affaires ne peut pas être négatif."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__message_has_sms_error
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Erreur d'envoi SMS"
+
+#. module: sales_bonus_grid
+#: model:ir.model,name:sales_bonus_grid.model_sales_bonus_grid
+msgid "Sales Bonus Grid"
+msgstr "Grille de primes commerciales"
+
+#. module: sales_bonus_grid
+#: model:ir.model,name:sales_bonus_grid.model_sales_bonus_grid_line
+msgid "Sales Bonus Grid Tier Line"
+msgstr "Ligne de palier de la grille de primes"
+
+#. module: sales_bonus_grid
+#: model:ir.model,name:sales_bonus_grid.model_sales_bonus_statement
+msgid "Sales Bonus Statement"
+msgstr "Relevé de primes commerciales"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.res_config_settings_view_form_sales_bonus
+msgid "Sales Bonus Tracker"
+msgstr "Suivi des primes commerciales"
+
+#. module: sales_bonus_grid
+#: model:ir.actions.server,name:sales_bonus_grid.ir_cron_ensure_monthly_grids_ir_actions_server
+msgid "Sales Bonus: Ensure Monthly Grids"
+msgstr "Primes commerciales : Vérifier les grilles mensuelles"
+
+#. module: sales_bonus_grid
+#: model:ir.actions.server,name:sales_bonus_grid.ir_cron_lock_closed_months_ir_actions_server
+msgid "Sales Bonus: Lock Closed Months"
+msgstr "Primes commerciales : Verrouiller les mois clôturés"
+
+#. module: sales_bonus_grid
+#: model:ir.actions.server,name:sales_bonus_grid.ir_cron_refresh_open_statements_ir_actions_server
+msgid "Sales Bonus: Refresh Open Statements"
+msgstr "Primes commerciales : Actualiser les relevés ouverts"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__user_id
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_unlock_wizard__salesperson_name
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_search
+msgid "Salesperson"
+msgstr "Commercial"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Salesperson:"
+msgstr "Commercial :"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_search
+msgid "Search Bonus Grids"
+msgstr "Rechercher des grilles de primes"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_search
+msgid "Search Statements"
+msgstr "Rechercher des relevés"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_unlock_wizard_form
+msgid ""
+"State the reason for unlocking this statement (e.g., invoice date "
+"correction, approved adjustment)..."
+msgstr ""
+"Indiquez le motif de déverrouillage de ce relevé (ex. : correction de date de facture, "
+"ajustement approuvé)..."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_unlock_wizard__statement_id
+msgid "Statement"
+msgstr "Relevé"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_res_config_settings__bonus_lock_day
+msgid "Statement Lock Day"
+msgstr "Jour de verrouillage du relevé"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid "Statement Locked"
+msgstr "Relevé verrouillé"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__date_month
+msgid "Statement Month"
+msgstr "Mois du relevé"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__name
+msgid "Statement Reference"
+msgstr "Référence du relevé"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/wizard/sales_bonus_unlock_wizard.py:0
+msgid "Statement Unlocked"
+msgstr "Relevé déverrouillé"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid "Statement date must always be the 1st day of the month."
+msgstr "La date du relevé doit toujours être le 1er jour du mois."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid ""
+"Statement locked by %(user)s on %(date)s. Revenue: %(rev)s, Bonus: %(bonus)s"
+msgstr ""
+"Relevé verrouillé par %(user)s le %(date)s. CA : %(rev)s, Prime : %(bonus)s"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/wizard/sales_bonus_unlock_wizard.py:0
+msgid "Statement reopened successfully and figures recomputed."
+msgstr "Relevé rouvert avec succès et chiffres recalculés."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__statement_ids
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_form
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_list
+msgid "Statements"
+msgstr "Relevés"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__statement_count
+msgid "Statements Count"
+msgstr "Nombre de relevés"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.actions.act_window,help:sales_bonus_grid.action_sales_bonus_statement_manager
+msgid ""
+"Statements are automatically generated each month for active salespeople\n"
+"                according to the company's bonus grid rules."
+msgstr ""
+"Les relevés sont générés automatiquement chaque mois pour les commerciaux actifs\n"
+"                selon les règles de la grille de primes de la société."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__state
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_search
+msgid "Status"
+msgstr "Statut"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_grid__activity_state
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_statement__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Statut basé sur les activités\n"
+"En retard : La date d'échéance est dépassée\n"
+"Aujourd'hui : L'activité est prévue aujourd'hui\n"
+"Planifié : Activités futures."
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Target Tier"
+msgstr "Palier cible"
+
+#. module: sales_bonus_grid
+#: model:ir.actions.act_window,name:sales_bonus_grid.action_sales_bonus_statement_manager
+#: model:ir.ui.menu,name:sales_bonus_grid.menu_sales_bonus_statement_manager
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_graph
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_list
+msgid "Team Bonuses"
+msgstr "Primes de l'équipe"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_pivot
+msgid "Team Bonuses Analysis"
+msgstr "Analyse des primes de l'équipe"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid.py:0
+msgid "The first bonus tier must start at 0.0 revenue (found %(val)s)."
+msgstr "Le premier palier de prime doit commencer à un CA de 0,0 (valeur trouvée : %(val)s)."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_grid.py:0
+msgid "The grid date must always be the 1st day of the month."
+msgstr "La date de la grille doit toujours être le 1er jour du mois."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid "This statement is locked and cannot be refreshed automatically."
+msgstr "Ce relevé est verrouillé et ne peut pas être actualisé automatiquement."
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__name
+msgid "Tier Label"
+msgstr "Libellé du palier"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Tier Level"
+msgstr "Niveau du palier"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_form
+msgid "Tiers"
+msgstr "Paliers"
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+msgid "Top tier reached! Maximum bonus achieved."
+msgstr "Palier maximum atteint ! Prime maximale obtenue."
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_list
+msgid "Total Bonus"
+msgstr "Prime totale"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_list
+msgid "Total Revenue"
+msgstr "Chiffre d'affaires total"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_grid__activity_exception_decoration
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_statement__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Type de l'activité en exception sur cet enregistrement."
+
+#. module: sales_bonus_grid
+#. odoo-python
+#: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_unlock_wizard_form
+msgid "Unlock Bonus Statement"
+msgstr "Déverrouiller le relevé de primes"
+
+#. module: sales_bonus_grid
+#: model:ir.model,name:sales_bonus_grid.model_sales_bonus_unlock_wizard
+msgid "Unlock Bonus Statement Wizard"
+msgstr "Assistant de déverrouillage du relevé de primes"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__unlock_reason
+msgid "Unlock Reason"
+msgstr "Motif de déverrouillage"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Unlock Statement"
+msgstr "Déverrouiller le relevé"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "Up To Revenue"
+msgstr "Jusqu'au CA"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__revenue_to
+msgid "Upper Bound"
+msgstr "Borne supérieure"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "View Counted Invoices"
+msgstr "Voir les factures comptées"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__website_message_ids
+#: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__website_message_ids
+msgid "Website Messages"
+msgstr "Messages du site web"
+
+#. module: sales_bonus_grid
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_grid__website_message_ids
+#: model:ir.model.fields,help:sales_bonus_grid.field_sales_bonus_statement__website_message_ids
+msgid "Website communication history"
+msgstr "Historique des communications du site web"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "by"
+msgstr "par"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_grid_form
+msgid "e.g. Tier 1 (0 to 10k)"
+msgstr "ex. Palier 1 (0 à 10k)"
+
+#. module: sales_bonus_grid
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
+msgid "posted invoice(s)"
+msgstr "facture(s) comptabilisée(s)"

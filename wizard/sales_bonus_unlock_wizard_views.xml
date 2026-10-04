@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sales_bonus_unlock_wizard_form" model="ir.ui.view">
+        <field name="name">sales.bonus.unlock.wizard.form</field>
+        <field name="model">sales.bonus.unlock.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Unlock Bonus Statement">
+                <div class="alert alert-warning" role="alert">
+                    <i class="fa fa-exclamation-triangle me-2"/>
+                    Unlocking a closed statement allows revenue and bonus figures to be modified and recalculated.
+                    A mandatory audit note will be logged in the statement's chatter.
+                </div>
+                <group>
+                    <group>
+                        <field name="statement_id" invisible="1"/>
+                        <field name="salesperson_name"/>
+                        <field name="date_month"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="reason" placeholder="State the reason for unlocking this statement (e.g., invoice date correction, approved adjustment)..." required="1"/>
+                </group>
+                <footer>
+                    <button name="action_confirm_unlock" string="Confirm Unlock" type="object" class="btn-warning"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
