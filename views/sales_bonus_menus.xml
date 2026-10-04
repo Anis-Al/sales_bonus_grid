@@ -22,5 +22,5 @@
               parent="sale.menu_sale_config"
               action="action_sales_bonus_grid"
               groups="sales_team.group_sale_manager"
-              sequence="45"/>
+              sequence="20"/>
 </odoo>

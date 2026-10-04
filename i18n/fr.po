@@ -542,7 +542,7 @@ msgstr "Icône Font Awesome, ex. fa-tasks"
 #. module: sales_bonus_grid
 #: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
 msgid "From Revenue"
-msgstr "À partir du CA"
+msgstr "À partir du"
 
 #. module: sales_bonus_grid
 #: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__grid_mode
@@ -1250,7 +1250,7 @@ msgstr "Déverrouiller le relevé"
 #. module: sales_bonus_grid
 #: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
 msgid "Up To Revenue"
-msgstr "Jusqu'au CA"
+msgstr "Jusqu'au"
 
 #. module: sales_bonus_grid
 #: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__revenue_to
