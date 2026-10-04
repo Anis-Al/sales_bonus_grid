@@ -25,7 +25,7 @@ class TestSalesBonusGrid(TransactionCase):
             'name': 'Seller Alice',
             'login': 'seller_alice',
             'email': 'alice@example.com',
-            'groups_id': [(6, 0, [cls.group_salesman.id])],
+            'group_ids': [(6, 0, [cls.group_salesman.id])],
             'company_ids': [(6, 0, [cls.company.id])],
             'company_id': cls.company.id,
         })
@@ -33,7 +33,7 @@ class TestSalesBonusGrid(TransactionCase):
             'name': 'Seller Bob',
             'login': 'seller_bob',
             'email': 'bob@example.com',
-            'groups_id': [(6, 0, [cls.group_salesman.id])],
+            'group_ids': [(6, 0, [cls.group_salesman.id])],
             'company_ids': [(6, 0, [cls.company.id])],
             'company_id': cls.company.id,
         })
@@ -41,7 +41,7 @@ class TestSalesBonusGrid(TransactionCase):
             'name': 'Manager Charlie',
             'login': 'manager_charlie',
             'email': 'charlie@example.com',
-            'groups_id': [(6, 0, [cls.group_manager.id])],
+            'group_ids': [(6, 0, [cls.group_manager.id])],
             'company_ids': [(6, 0, [cls.company.id])],
             'company_id': cls.company.id,
         })
@@ -54,12 +54,12 @@ class TestSalesBonusGrid(TransactionCase):
 
         # Test dates — each test method that persists a grid uses a unique month
         # to avoid UNIQUE(company_id, date_month) constraint conflicts.
-        cls.october_month = date(2026, 10, 1)
-        cls.november_month = date(2026, 11, 1)
-        cls.december_month = date(2026, 12, 1)
-        cls.january_month = date(2027, 1, 1)
-        cls.february_month = date(2027, 2, 1)
-        cls.march_month = date(2027, 3, 1)
+        cls.october_month = date(2029, 10, 1)
+        cls.november_month = date(2029, 11, 1)
+        cls.december_month = date(2029, 12, 1)
+        cls.january_month = date(2030, 1, 1)
+        cls.february_month = date(2030, 2, 1)
+        cls.march_month = date(2030, 3, 1)
 
     def _create_sample_grid_cliff(self, month=None):
         """Creates a Cliff grid: 0..10k -> 0; 10k..20k -> 50; 20k+ -> 100.
@@ -111,9 +111,9 @@ class TestSalesBonusGrid(TransactionCase):
         """Verify grid constraint checks (first tier 0, ascending thresholds, unique month)."""
         # Use dedicated months so these intentionally-failing creates cannot
         # interact with grids from other test methods even in shared transactions.
-        MONTH_A = date(2026, 3, 1)
-        MONTH_B = date(2026, 4, 1)
-        MONTH_C = date(2026, 5, 1)
+        MONTH_A = date(2029, 3, 1)
+        MONTH_B = date(2029, 4, 1)
+        MONTH_C = date(2029, 5, 1)
 
         # 1. First line must start at 0
         with self.assertRaises(ValidationError):
@@ -163,7 +163,7 @@ class TestSalesBonusGrid(TransactionCase):
         })
 
         # Case A: Revenue = 9,999 -> Tier 1 (Bonus: 0)
-        self._create_posted_invoice(self.salesperson_1, date(2026, 10, 5), 9999.0)
+        self._create_posted_invoice(self.salesperson_1, date(2029, 10, 5), 9999.0)
         stmt.with_context(force_recompute=True)._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 9999.0)
         self.assertEqual(stmt.bonus, 0.0)
@@ -174,7 +174,7 @@ class TestSalesBonusGrid(TransactionCase):
         self.assertAlmostEqual(stmt.progress, 99.99, places=2)
 
         # Case B: Revenue reaches 10,000 exactly -> Tier 2 (Bonus: 50)
-        self._create_posted_invoice(self.salesperson_1, date(2026, 10, 10), 1.0)
+        self._create_posted_invoice(self.salesperson_1, date(2029, 10, 10), 1.0)
         stmt.with_context(force_recompute=True)._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 10000.0)
         self.assertEqual(stmt.bonus, 50.0)
@@ -185,7 +185,7 @@ class TestSalesBonusGrid(TransactionCase):
         self.assertEqual(stmt.progress, 0.0)
 
         # Case C: Revenue reaches 20,000 -> Tier 3 (Bonus: 100, Top Tier)
-        self._create_posted_invoice(self.salesperson_1, date(2026, 10, 15), 10000.0)
+        self._create_posted_invoice(self.salesperson_1, date(2029, 10, 15), 10000.0)
         stmt.with_context(force_recompute=True)._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 20000.0)
         self.assertEqual(stmt.bonus, 100.0)
@@ -205,8 +205,8 @@ class TestSalesBonusGrid(TransactionCase):
         })
 
         # Post 10,000 invoice and 1,000 refund
-        self._create_posted_invoice(self.salesperson_1, date(2026, 10, 10), 10000.0, 'out_invoice')
-        self._create_posted_invoice(self.salesperson_1, date(2026, 10, 15), 1000.0, 'out_refund')
+        self._create_posted_invoice(self.salesperson_1, date(2029, 10, 10), 10000.0, 'out_invoice')
+        self._create_posted_invoice(self.salesperson_1, date(2029, 10, 15), 1000.0, 'out_refund')
 
         stmt.with_context(force_recompute=True)._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 9000.0)
@@ -237,13 +237,13 @@ class TestSalesBonusGrid(TransactionCase):
         })
 
         # Test 15,000 revenue: (10k * 0%) + (5k * 5%) = 250
-        self._create_posted_invoice(self.salesperson_1, date(2026, 12, 10), 15000.0)
+        self._create_posted_invoice(self.salesperson_1, date(2029, 12, 10), 15000.0)
         stmt.with_context(force_recompute=True)._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 15000.0)
         self.assertEqual(stmt.bonus, 250.0)
 
         # Add 10,000 more (total 25,000): (10k * 0%) + (10k * 5%) + (5k * 10%) = 0 + 500 + 500 = 1000
-        self._create_posted_invoice(self.salesperson_1, date(2026, 12, 20), 10000.0)
+        self._create_posted_invoice(self.salesperson_1, date(2029, 12, 20), 10000.0)
         stmt.with_context(force_recompute=True)._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 25000.0)
         self.assertEqual(stmt.bonus, 1000.0)
@@ -276,7 +276,7 @@ class TestSalesBonusGrid(TransactionCase):
             'grid_id': grid.id,
         })
 
-        self._create_posted_invoice(self.salesperson_1, date(2026, 10, 10), 10000.0)
+        self._create_posted_invoice(self.salesperson_1, date(2029, 10, 10), 10000.0)
         stmt.with_context(force_recompute=True)._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 10000.0)
         self.assertEqual(stmt.bonus, 50.0)
@@ -288,7 +288,7 @@ class TestSalesBonusGrid(TransactionCase):
         self.assertEqual(stmt.locked_by, self.manager_user)
 
         # Post another invoice in October
-        self._create_posted_invoice(self.salesperson_1, date(2026, 10, 25), 10000.0)
+        self._create_posted_invoice(self.salesperson_1, date(2029, 10, 25), 10000.0)
 
         # Recalculate without bypass
         stmt._compute_revenue_and_bonus()

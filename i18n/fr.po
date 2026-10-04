@@ -91,7 +91,7 @@ msgstr ""
 #. module: sales_bonus_grid
 #: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
 msgid "<i class=\"fa fa-table me-2\"/>Monthly Bonus Grid Tiers"
-msgstr "<i class=\"fa fa-table me-2\"/>Paliers de la grille de primes mensuelle"
+msgstr "<i class=\"fa fa-table me-2\"/>Grille des primes mensuelles"
 
 #. module: sales_bonus_grid
 #: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
@@ -214,7 +214,7 @@ msgstr "Recalculer automatiquement les relevés ouverts chaque heure."
 #: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid_line__bonus_value
 #: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
 msgid "Bonus Amount"
-msgstr "Montant de la prime"
+msgstr "Montant"
 
 #. module: sales_bonus_grid
 #: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form

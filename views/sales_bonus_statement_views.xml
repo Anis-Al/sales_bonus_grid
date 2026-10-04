@@ -61,9 +61,6 @@
                                 <div class="fs-3 fw-bold text-dark">
                                     <field name="revenue" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                                 </div>
-                                <div class="small text-muted mt-1">
-                                    <field name="invoice_count"/> posted invoice(s)
-                                </div>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
@@ -72,9 +69,6 @@
                                 <div class="fs-2 fw-bolder">
                                     <field name="bonus" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                                 </div>
-                                <div class="small opacity-75 mt-1">
-                                    Live calculation
-                                </div>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
@@ -82,9 +76,6 @@
                                 <div class="text-uppercase fw-bold text-muted small mb-1">Current Tier</div>
                                 <div class="fs-4 fw-bold text-success">
                                     <field name="current_line_id" options="{'no_open': True}"/>
-                                </div>
-                                <div class="small text-muted mt-1">
-                                    Active bonus bracket
                                 </div>
                             </div>
                         </div>
@@ -105,7 +96,7 @@
                         </div>
                     </div>
 
-                    <!-- Progress Bar & Caption Section -->
+                    <!--
                     <div class="card shadow-sm border-0 mb-4 p-3 rounded-3 bg-light">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <span class="fw-bold text-secondary">
@@ -120,6 +111,7 @@
                             <strong><field name="progress_caption" readonly="1"/></strong>
                         </div>
                     </div>
+                    -->
 
                     <!-- Bonus Grid Tiers Table with Dynamic Row Highlights -->
                     <div class="mb-4">

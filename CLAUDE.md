@@ -169,7 +169,18 @@ Technical Standard: Built according to the official Odoo 19 development referenc
   - When `state == 'locked'`, `_compute_revenue_and_bonus()` immediately exits unless `context.get('force_recompute')` is set. This protects historical payroll/financial snapshots against post-close database changes.
 - **Late Credit Note Detection (`_compute_late_credit_notes`)**:
   - Detects credit notes posted with `invoice_date` inside a past *locked* month, but whose `create_date` is later than that statement's `locked_on` timestamp.
-  - Banners a notice on the salesperson's current open statement so that finance can manually review and adjust if appropriate.
+- **Store Revenue & Seller Reward Architecture**:
+  - **Active Model (Selected)**:
+    - **Store Definition**: Whole Company (`company_id`). All posted customer invoices and credit notes (`out_invoice`, `out_refund`) of the company for that month constitute the store's revenue.
+    - **Seller Reward**: Full tier bonus to each seller. When the store reaches a tier, every active seller receives that tier's bonus (threshold evaluation is based on store achievement).
+  - **Alternative Architectural Options (Kept for future reference)**:
+    - *Alternative Store Definitions*:
+      - *Sales Team (`crm.team`)*: Track revenue per sales team by filtering `account.move.team_id == seller.sale_team_id`. Useful if different teams represent distinct physical shops or departments.
+      - *POS Shop (`pos.config`)*: Track revenue per Point of Sale shop / retail register (`pos.order.config_id`). Useful in multi-POS retail setups.
+    - *Alternative Bonus Allocation Schemes*:
+      - *Equal Split*: Tier bonus is divided equally among active sellers of the store (`bonus = tier.bonus_value / active_sellers_count`).
+      - *Proportional to Seller Share*: Store reaches tier X, but each seller receives a proportion based on their personal contribution (`bonus = tier.bonus_value * (seller_sales / store_sales)`).
+      - *Percentage of Store Revenue*: Bonus is calculated as a direct percentage of the store's total revenue distributed among sellers.
 - **`action_open_my_bonus()`**:
   - Server action invoked by the "Sales → My Bonus" menu item.
   - Automatically fetches or instantiates the statement for `self.env.user` for the current month (creating or inheriting the company grid if necessary), and returns a form view window action.
@@ -212,5 +223,26 @@ odoo-bin -c odoo.conf -d <database_name> -u sales_bonus_grid --test-tags sales_b
   - Added [`.gitignore`](file:///c:/Program%20Files/Odoo%2019.0.20260724/server/odoo/mnt/sales_bonus_grid/.gitignore) ignoring Python bytecode (`__pycache__/`, `*.pyc`), IDEs (`.vscode/`, `.idea/`), OS metadata (`Thumbs.db`, `.DS_Store`), and log/temp files.
 
 
-- **Bonus Dashboard -- Hide Salesperson / Company / Month header**:
-  - `views/sales_bonus_statement_views.xml`: Removed the subtitle div containing `user_id`, `company_id`, and `date_month` from the "My Bonus" form view. The statement title (<h2>) already conveys full context, making the repeated metadata redundant.
+- **Bonus Dashboard — Hide Salesperson / Company / Month header**:
+  - `views/sales_bonus_statement_views.xml`: Removed the subtitle div containing `user_id`, `company_id`, and `date_month` from the "My Bonus" form view. The statement title (`<h2>`) already conveys full context, making the repeated metadata redundant.
+- **Store-Wide Revenue & Seller Reward Model (Company Sales)**:
+  - **Business Shift**: Commission/bonus tier qualification is now based on total store sales (company revenue), rather than individual salesperson sales. Every active seller in the store receives the full tier bonus achieved by the store.
+  - `models/sales_bonus_statement.py`:
+    - Removed `invoice_user_id` filtering from `_get_invoices_domain()` so statement revenue aggregates store-wide (company-level) sales.
+    - Updated `_compute_invoice_count()` to count store invoices for the month.
+    - Updated `action_view_invoices()` to display Store Invoices for the month.
+    - Removed `invoice_user_id` restriction in `_compute_late_credit_notes()` so any refund posted against the store's locked month triggers the warning.
+    - Fixed `groups_id` to `group_ids` for Odoo 19 compatibility.
+  - `views/sales_bonus_statement_views.xml`:
+    - Updated card metric from "Revenue So Far" to "Store Revenue".
+    - Removed `sum="Total Revenue"` from manager list view to avoid summing store revenue redundantly across sellers.
+  - `i18n/fr.po`:
+    - Added French translations for "Store Revenue" (*CA du magasin*) and "Store Invoices" (*Factures du magasin*).
+  - `tests/test_sales_bonus_grid.py`:
+    - Fixed `groups_id` -> `group_ids` on `res.users`.
+    - Shifted test date horizons to prevent collision with live company invoices. All 8 tests passing.
+- **Bonus Dashboard — Remove card subtitles**:
+  - `views/sales_bonus_statement_views.xml`: Removed three subtitle lines from the stat card row:
+    - **Revenue card**: removed `X facture(s) comptabilisee(s)` (`invoice_count` subtitle).
+    - **Bonus card**: removed `Calcul en temps reel` ("Live calculation") subtitle.
+    - **Current Tier card**: removed `Tranche de prime active` ("Active bonus bracket") subtitle only — card itself kept.
