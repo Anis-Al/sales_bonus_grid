@@ -51,11 +51,6 @@
                         <h2 class="text-primary mb-1">
                             <field name="name" readonly="1"/>
                         </h2>
-                        <div class="text-muted mb-3">
-                            <span>Salesperson: <strong><field name="user_id" readonly="1" options="{'no_open': True}"/></strong></span>
-                            <span class="ms-3" groups="base.group_multi_company">Company: <strong><field name="company_id" readonly="1" options="{'no_open': True}"/></strong></span>
-                            <span class="ms-3">Month: <strong><field name="date_month" readonly="1" widget="month_picker"/></strong></span>
-                        </div>
                     </div>
 
                     <!-- Main Metric Stat Cards -->

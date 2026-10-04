@@ -212,3 +212,5 @@ odoo-bin -c odoo.conf -d <database_name> -u sales_bonus_grid --test-tags sales_b
   - Added [`.gitignore`](file:///c:/Program%20Files/Odoo%2019.0.20260724/server/odoo/mnt/sales_bonus_grid/.gitignore) ignoring Python bytecode (`__pycache__/`, `*.pyc`), IDEs (`.vscode/`, `.idea/`), OS metadata (`Thumbs.db`, `.DS_Store`), and log/temp files.
 
 
+- **Bonus Dashboard -- Hide Salesperson / Company / Month header**:
+  - `views/sales_bonus_statement_views.xml`: Removed the subtitle div containing `user_id`, `company_id`, and `date_month` from the "My Bonus" form view. The statement title (<h2>) already conveys full context, making the repeated metadata redundant.
