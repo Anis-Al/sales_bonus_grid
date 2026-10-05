@@ -96,7 +96,7 @@ class SalesBonusGrid(models.Model):
     def _compute_name(self):
         for grid in self:
             if grid.date_month:
-                month_str = grid.date_month.strftime('%B %Y')
+                month_str = grid.date_month.strftime('%B %Y').capitalize()
                 grid.name = _("Bonus Grid - %(month)s", month=month_str)
             else:
                 grid.name = _("New Bonus Grid")

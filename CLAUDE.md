@@ -242,7 +242,7 @@ Every inline comment was stripped from the source on 2026-10-05 and lives here, 
 - `test_06_locked_statement_immutability`: lock as manager → post another October invoice → recalculate without bypass (figures must stay frozen).
 - `test_07_security_record_rules`: Alice sees only Alice's statement, Bob only Bob's; verifies manager implies salesman (drives the rule OR logic); manager Charlie sees both.
 - `test_08_unlock_wizard`: salesperson cannot unlock; manager unlocks via wizard.
-- `test_09_admin_excluded`: `base.user_admin` gets the empty My Bonus list and no statement from the refresh cron; a regular seller still does.
+- `test_09_admin_excluded`: `base.user_admin` gets the empty My Bonus list, no statement from the refresh cron, and no My Bonus menu; a regular seller still gets all three.
 
 ---
 
@@ -311,9 +311,14 @@ odoo-bin -c odoo.conf -d <database_name> -u sales_bonus_grid --test-tags sales_b
 
 ### 2026-10-05
 
+- **Grid name — capitalized month**: `_compute_name()` in `models/sales_bonus_grid.py` now applies `.capitalize()` to `strftime('%B %Y')`, so French locale gives "Grille de primes - Octobre 2026" instead of "octobre".
+  - `name` is stored and depends only on `date_month`, so existing grids keep the old lowercase name until renamed. In `mconfort`, grid 40 ("Grille de primes - octobre 2026") still needs a manual rename.
+  - Not applied to statement names, chatter messages or the late credit-note warning in `models/sales_bonus_statement.py`. They still use a lowercase month.
+
 - **Admins excluded from bonuses**: users in `base.group_system` (`_is_system()`) never get a statement.
   - `cron_refresh_open_statements()` filters them out of `all_users`.
   - `action_open_my_bonus()` shows them the "No bonus available yet" empty state instead of creating a statement.
+  - `models/ir_ui_menu.py` overrides `_visible_menu_ids()` to drop `menu_sales_bonus_my_bonus` for them. A menu `groups` attribute can't exclude a group, so the override is needed (same pattern as `account_accountant`). Base result is ormcached per group set, so admins and sellers get different cache entries.
   - Existing statements are untouched (none existed in `mconfort`). `test_09_admin_excluded` covers both paths.
 
 - **Code Hygiene — all source comments moved to CLAUDE.md**: stripped every remaining XML/Python/SCSS comment (views, menus, crons, security, scss, statement model, wizard, tests) into section 3 → *Moved Source Comments*. Kept only the `coding` headers and the shelved progress-card block in the dashboard.

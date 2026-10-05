@@ -343,3 +343,8 @@ class TestSalesBonusGrid(TransactionCase):
         stmts = Statement.search([('company_id', '=', self.company.id), ('date_month', '=', current_month)])
         self.assertNotIn(admin, stmts.user_id)
         self.assertIn(self.salesperson_1, stmts.user_id)
+
+        my_bonus_menu = self.env.ref('sales_bonus_grid.menu_sales_bonus_my_bonus')
+        Menu = self.env['ir.ui.menu']
+        self.assertNotIn(my_bonus_menu.id, Menu.with_user(admin)._visible_menu_ids())
+        self.assertIn(my_bonus_menu.id, Menu.with_user(self.salesperson_1)._visible_menu_ids())
