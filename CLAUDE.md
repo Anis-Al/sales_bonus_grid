@@ -129,7 +129,7 @@ Technical Standard: Built according to the official Odoo 19 development referenc
 
 ## 3. Code Notes & Architectural Rationale
 
-> The source Python files carry minimal inline comments: every architectural decision and "why" lives in this section instead. Keep this section updated with any future modifications.
+> The source files carry no explanatory comments: every architectural decision and "why" lives in this section instead. Keep this section updated with any future modifications.
 
 ### `models/sales_bonus_grid.py`
 
@@ -155,7 +155,7 @@ Technical Standard: Built according to the official Odoo 19 development referenc
 ### `models/sales_bonus_statement.py`
 
 - **Revenue Recognition (`_get_invoices_domain` & `_read_group`)**:
-  - Filtered by `move_type in ('out_invoice', 'out_refund')`, `state == 'posted'`, `invoice_user_id == user.id`, `company_id == company.id`, and `invoice_date` falling within the 1st and last day of `date_month`.
+  - Filtered by `move_type in ('out_invoice', 'out_refund')`, `state == 'posted'`, `company_id == company.id`, and `invoice_date` falling within the 1st and last day of `date_month`.
   - In `paid` basis, additionally filters by `payment_state in ('paid', 'in_payment')`.
   - Aggregates `amount_untaxed_signed:sum` directly in the database. Customer invoices have positive signed untaxed amounts, while credit notes have negative signed untaxed amounts, naturally computing Net Invoiced Revenue in company currency without looping Python records.
 - **Bonus Calculation Engine (`_calculate_bonus`)**:
@@ -169,6 +169,7 @@ Technical Standard: Built according to the official Odoo 19 development referenc
   - When `state == 'locked'`, `_compute_revenue_and_bonus()` immediately exits unless `context.get('force_recompute')` is set. This protects historical payroll/financial snapshots against post-close database changes.
 - **Late Credit Note Detection (`_compute_late_credit_notes`)**:
   - Detects credit notes posted with `invoice_date` inside a past *locked* month, but whose `create_date` is later than that statement's `locked_on` timestamp.
+  - Executes a single batched `search_read` query covering the entire date range of all locked months (`min_start` to `max_end`). Filtering per statement is performed in Python to avoid N+1 database queries.
 - **Store Revenue & Seller Reward Architecture**:
   - **Active Model (Selected)**:
     - **Store Definition**: Whole Company (`company_id`). All posted customer invoices and credit notes (`out_invoice`, `out_refund`) of the company for that month constitute the store's revenue.
@@ -190,10 +191,113 @@ Technical Standard: Built according to the official Odoo 19 development referenc
 ### `wizard/sales_bonus_unlock_wizard.py`
 
 - **Auditability**: Unlocking a frozen statement is restricted to `sales_team.group_sale_manager`. A non-empty reason is mandatory and posted directly to the statement's chatter alongside the user and timestamp.
+- **Recomputation Sync**: Upon unlock, immediately invokes `_compute_revenue_and_bonus()` with `force_recompute=True` to re-sync figures with any transactions that occurred while the period was locked, and refreshes `last_refresh`.
 
 ---
 
-## 4. How to Run Tests
+### Moved Source Comments
+
+Every inline comment was stripped from the source on 2026-10-05 and lives here, keyed by file and the element it described. Only exceptions kept in source: the `# -*- coding: utf-8 -*-` headers and the shelved progress-card block in the My Bonus dashboard (see section 4).
+
+**`views/sales_bonus_statement_views.xml`**
+- `action_sales_bonus_my_bonus_server`: Server Action for "My Bonus" Personal Dashboard.
+- `view_sales_bonus_statement_my_bonus_form`: My Bonus Form View (Dedicated Rich Personal View). Inside it, in order: Late Credit Note Warning Alert → Locked Notice → Main Metric Stat Cards → *(shelved progress card)* → Bonus Grid Tiers Table with Dynamic Row Highlights.
+- `view_sales_bonus_statement_list`: Manager List View.
+- `view_sales_bonus_statement_pivot` / `_graph` / `_search`: Pivot, Graph, Search views.
+- `action_sales_bonus_statement_manager`: Action — Manager Team Bonuses.
+
+**`views/sales_bonus_grid_views.xml`**
+- List, Form, Search views and Action for `sales.bonus.grid`.
+
+**`views/sales_bonus_menus.xml`**
+1. `menu_sales_bonus_my_bonus`: Personal Menu — Sales → My Bonus.
+2. `menu_sales_bonus_statement_manager`: Manager Reporting Menu — Sales → Reporting → Team Bonuses.
+3. `menu_sales_bonus_grid_config`: Configuration Menu — Sales → Configuration → Bonus Grids.
+
+**`data/ir_cron_data.xml`**
+- `ir_cron_refresh_open_statements`: Hourly Refresh of Open Statements.
+- `ir_cron_lock_closed_months`: Daily Lock of Closed Months.
+- `ir_cron_ensure_monthly_grids`: Monthly Grid Inheritance Check (runs daily, idempotent).
+
+**`security/sales_bonus_security.xml`**
+- First three rules: Multi-Company Rules. Last two: Statement User Rules (personal + manager).
+
+**`static/src/scss/sales_bonus.scss`**
+- File header: Sales Bonus Tracker UI styling.
+
+**`models/sales_bonus_statement.py`**
+- `_compute_late_credit_notes`, the `search_read`: single batched query covering the entire range of locked months; per-statement filtering is done in Python to avoid N+1 queries.
+
+**`wizard/sales_bonus_unlock_wizard.py`**
+- Before `_compute_revenue_and_bonus()` on unlock: trigger recomputation to sync with any changes made while locked.
+
+**`tests/test_sales_bonus_grid.py`**
+- `setUpClass`: blocks are Sales Groups → Test Users → Test Customer Partner → Test dates. Each test method that persists a grid uses a unique month to avoid `UNIQUE(company_id, date_month)` conflicts.
+- Invoice helper: `'tax_ids': [(5, 0, 0)]` = no tax, so untaxed amount is tested directly.
+- `test_01_grid_validation_constraints`: uses dedicated months so the intentionally-failing creates can't interact with other tests' grids in shared transactions. Cases: (1) first line must start at 0; (2) thresholds strictly ascending, no duplicates or descending; (3) Progressive mode requires percent bonus.
+- `test_02_cliff_mode_fixed_bonus`: (A) revenue 9,999 → Tier 1, bonus 0; (B) exactly 10,000 → Tier 2, bonus 50; (C) 20,000 → Tier 3, bonus 100, top tier.
+- `test_03_credit_note_subtraction`: post 10,000 invoice and 1,000 refund; 9,000 is under 10k, so bonus is 0.
+- `test_04_progressive_mode_calculation`: 15,000 → (10k × 0%) + (5k × 5%) = 250; add 10,000 (total 25,000) → 0 + 500 + 500 = 1,000.
+- `test_05_grid_automatic_inheritance`: fetch grid for November (doesn't exist yet); modifying November's grid doesn't alter October's.
+- `test_06_locked_statement_immutability`: lock as manager → post another October invoice → recalculate without bypass (figures must stay frozen).
+- `test_07_security_record_rules`: Alice sees only Alice's statement, Bob only Bob's; verifies manager implies salesman (drives the rule OR logic); manager Charlie sees both.
+- `test_08_unlock_wizard`: salesperson cannot unlock; manager unlocks via wizard.
+
+---
+
+## 4. Shelved & Commented-out Code Snippets
+
+Source files carry no commented-out code blocks or shelved markup: every temporarily shelved component or design iteration lives here for future reference or re-activation.
+
+### `views/sales_bonus_statement_views.xml` — Progress Bar Card
+
+Shelved during dashboard refactoring to simplify the personal "My Bonus" view and focus attention on the four top metric cards and the interactive tiers table.
+
+To restore the progress card, place this XML snippet directly above the `Monthly Bonus Grid Tiers` table in `views/sales_bonus_statement_views.xml`:
+
+```xml
+<div class="card shadow-sm border-0 mb-4 p-3 rounded-3 bg-light">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <span class="fw-bold text-secondary">
+            <i class="fa fa-line-chart me-1"/> Progress to Next Tier
+        </span>
+    </div>
+    <div class="mb-2">
+        <field name="progress" widget="progressbar"/>
+    </div>
+    <div class="text-muted small">
+        <i class="fa fa-info-circle me-1" title="Info"/>
+        <strong><field name="progress_caption" readonly="1"/></strong>
+    </div>
+</div>
+```
+
+### `views/sales_bonus_statement_views.xml` — Stat Card Subtitles
+
+Removed from the top stat cards to achieve a clean, uncluttered presentation without redundant captions:
+
+- **Store Revenue Card**:
+  ```xml
+  <div class="small text-muted mt-1">
+      <field name="invoice_count"/> posted invoice(s)
+  </div>
+  ```
+- **Earned Bonus Card**:
+  ```xml
+  <div class="small opacity-75 mt-1">
+      Live calculation
+  </div>
+  ```
+- **Current Tier Card**:
+  ```xml
+  <div class="small text-muted mt-1">
+      Active bonus bracket
+  </div>
+  ```
+
+---
+
+## 5. How to Run Tests
 
 Run the test suite using Odoo's test runner:
 ```bash
@@ -202,7 +306,25 @@ odoo-bin -c odoo.conf -d <database_name> -u sales_bonus_grid --test-tags sales_b
 
 ---
 
-## 5. Changelog
+## 6. Changelog
+
+### 2026-10-05
+
+- **Code Hygiene — all source comments moved to CLAUDE.md**: stripped every remaining XML/Python/SCSS comment (views, menus, crons, security, scss, statement model, wizard, tests) into section 3 → *Moved Source Comments*. Kept only the `coding` headers and the shelved progress-card block in the dashboard.
+
+- **My Bonus — empty state when no grid**:
+  - `action_open_my_bonus()` no longer redirects to the grid list ("Configuration des grilles de primes") when the company has no grid. It opens an empty statement list (`domain [('id','=',False)]`) on the dedicated view `view_sales_bonus_statement_empty_list` (priority 99, `class="o_sales_bonus_empty"`) with a "No bonus available yet" help message.
+  - Odoo 19's `ListRenderer` still renders the table headers under the no-content helper, so `sales_bonus.scss` hides `.o_sales_bonus_empty .o_list_table`: only the text shows.
+  - `i18n/fr.po`: replaced "Bonus Grids Setup" with "No bonus available yet" (*Aucune prime disponible pour le moment*).
+- **Calculation mode — always Cliff**:
+  - `sales.bonus.grid.mode` default is now hard `'cliff'` (no longer read from `company.bonus_default_mode`).
+  - Removed `mode` from the grid list, form, search filters (Cliff/Progressive) and group-by; removed the "Default Calculation Mode" setting from Sales Settings.
+  - Progressive engine code, `res.company.bonus_default_mode` and its `res.config.settings` related field are kept in the model but unused by any view.
+
+- **Code Hygiene — Cleaned Comments & Shelved Code**:
+  - Removed commented-out `<div class="card...">` progress bar card from `views/sales_bonus_statement_views.xml`.
+  - Removed inline explanatory comments from `models/sales_bonus_statement.py` and `wizard/sales_bonus_unlock_wizard.py`.
+  - Added dedicated section **4. Shelved & Commented-out Code Snippets** in `CLAUDE.md` preserving all shelved UI components, stat card subtitles, and explanatory architectural notes.
 
 ### 2026-10-04
 

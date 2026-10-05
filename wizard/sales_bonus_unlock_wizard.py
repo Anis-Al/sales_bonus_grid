@@ -52,7 +52,6 @@ class SalesBonusUnlockWizard(models.TransientModel):
             )
         )
 
-        # Trigger recomputation to sync with any changes
         statement.with_context(force_recompute=True)._compute_revenue_and_bonus()
         statement.last_refresh = fields.Datetime.now()
 

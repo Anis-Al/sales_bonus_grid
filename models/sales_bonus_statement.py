@@ -367,8 +367,6 @@ class SalesBonusStatement(models.Model):
 
             warnings = []
             if past_locked:
-                # Single batched query covering the entire range of locked months.
-                # Filtering per-statement is done in Python to avoid N+1 queries.
                 min_start = min(s.date_month for s in past_locked)
                 max_end = max(s.date_month + relativedelta(months=1, days=-1) for s in past_locked)
                 all_refunds = self.env['account.move'].search_read(
@@ -523,14 +521,13 @@ class SalesBonusStatement(models.Model):
             if not grid:
                 return {
                     'type': 'ir.actions.act_window',
-                    'name': _("Bonus Grids Setup"),
-                    'res_model': 'sales.bonus.grid',
-                    'view_mode': 'list,form',
+                    'name': _("My Bonus"),
+                    'res_model': 'sales.bonus.statement',
+                    'view_mode': 'list',
+                    'views': [(self.env.ref('sales_bonus_grid.view_sales_bonus_statement_empty_list').id, 'list')],
+                    'domain': [('id', '=', False)],
                     'target': 'current',
-                    'context': {
-                        'default_company_id': company.id,
-                        'default_date_month': current_month,
-                    }
+                    'help': '<p class="o_view_nocontent_empty_folder">%s</p>' % _("No bonus available yet"),
                 }
 
             statement = self.sudo().create({

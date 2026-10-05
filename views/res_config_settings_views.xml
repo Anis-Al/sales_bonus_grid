@@ -16,9 +16,6 @@
                     <setting id="bonus_default_basis_setting" string="Default Revenue Basis" help="Default revenue recognition mode for newly generated monthly grids.">
                         <field name="bonus_default_revenue_basis"/>
                     </setting>
-                    <setting id="bonus_default_mode_setting" string="Default Calculation Mode" help="Default calculation rule (Cliff or Progressive) for newly generated monthly grids.">
-                        <field name="bonus_default_mode"/>
-                    </setting>
                 </block>
             </xpath>
         </field>

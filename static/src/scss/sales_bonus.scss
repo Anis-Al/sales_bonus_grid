@@ -1,4 +1,3 @@
-/* Sales Bonus Tracker UI styling */
 .o_sales_bonus_card {
     border-radius: 0.75rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -17,4 +16,8 @@
 .o_tier_current_row {
     background-color: rgba(25, 135, 84, 0.12) !important;
     font-weight: bold;
+}
+
+.o_sales_bonus_empty .o_list_table {
+    display: none;
 }

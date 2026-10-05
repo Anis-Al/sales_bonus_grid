@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Server Action for "My Bonus" Personal Dashboard -->
     <record id="action_sales_bonus_my_bonus_server" model="ir.actions.server">
         <field name="name">My Bonus</field>
         <field name="model_id" ref="model_sales_bonus_statement"/>
@@ -8,7 +7,6 @@
         <field name="code">action = model.action_open_my_bonus()</field>
     </record>
 
-    <!-- My Bonus Form View (Dedicated Rich Personal View) -->
     <record id="view_sales_bonus_statement_my_bonus_form" model="ir.ui.view">
         <field name="name">sales.bonus.statement.my_bonus.form</field>
         <field name="model">sales.bonus.statement</field>
@@ -28,7 +26,6 @@
                     <field name="current_line_id" invisible="1"/>
                     <field name="next_line_id" invisible="1"/>
 
-                    <!-- Late Credit Note Warning Alert -->
                     <div class="alert alert-danger d-flex align-items-center mb-3" role="alert" invisible="not late_credit_note_warning">
                         <i class="fa fa-exclamation-circle fa-2x me-3" title="Warning"/>
                         <div>
@@ -37,7 +34,6 @@
                         </div>
                     </div>
 
-                    <!-- Locked Notice -->
                     <div class="alert alert-info mb-3" role="alert" invisible="state == 'open'">
                         <i class="fa fa-lock me-2" title="Locked"/>
                         This statement was <strong>locked</strong> on <field name="locked_on" readonly="1"/> by <field name="locked_by" readonly="1"/>.
@@ -53,7 +49,6 @@
                         </h2>
                     </div>
 
-                    <!-- Main Metric Stat Cards -->
                     <div class="row g-3 mb-4">
                         <div class="col-md-3 col-sm-6">
                             <div class="card shadow-sm border-0 bg-light p-3 h-100 rounded-3 text-center">
@@ -113,7 +108,6 @@
                     </div>
                     -->
 
-                    <!-- Bonus Grid Tiers Table with Dynamic Row Highlights -->
                     <div class="mb-4">
                         <h4 class="text-secondary mb-3">
                             <i class="fa fa-table me-2"/>Monthly Bonus Grid Tiers
@@ -139,7 +133,6 @@
         </field>
     </record>
 
-    <!-- Manager List View: sales.bonus.statement -->
     <record id="view_sales_bonus_statement_list" model="ir.ui.view">
         <field name="name">sales.bonus.statement.list</field>
         <field name="model">sales.bonus.statement</field>
@@ -161,7 +154,17 @@
         </field>
     </record>
 
-    <!-- Pivot View: sales.bonus.statement -->
+    <record id="view_sales_bonus_statement_empty_list" model="ir.ui.view">
+        <field name="name">sales.bonus.statement.empty.list</field>
+        <field name="model">sales.bonus.statement</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <list create="0" class="o_sales_bonus_empty">
+                <field name="date_month"/>
+            </list>
+        </field>
+    </record>
+
     <record id="view_sales_bonus_statement_pivot" model="ir.ui.view">
         <field name="name">sales.bonus.statement.pivot</field>
         <field name="model">sales.bonus.statement</field>
@@ -175,7 +178,6 @@
         </field>
     </record>
 
-    <!-- Graph View: sales.bonus.statement -->
     <record id="view_sales_bonus_statement_graph" model="ir.ui.view">
         <field name="name">sales.bonus.statement.graph</field>
         <field name="model">sales.bonus.statement</field>
@@ -187,7 +189,6 @@
         </field>
     </record>
 
-    <!-- Search View: sales.bonus.statement -->
     <record id="view_sales_bonus_statement_search" model="ir.ui.view">
         <field name="name">sales.bonus.statement.search</field>
         <field name="model">sales.bonus.statement</field>
@@ -213,7 +214,6 @@
         </field>
     </record>
 
-    <!-- Action: Manager Team Bonuses -->
     <record id="action_sales_bonus_statement_manager" model="ir.actions.act_window">
         <field name="name">Team Bonuses</field>
         <field name="res_model">sales.bonus.statement</field>

@@ -249,8 +249,8 @@ msgstr "Grilles de primes"
 #. module: sales_bonus_grid
 #. odoo-python
 #: code:addons/sales_bonus_grid/models/sales_bonus_statement.py:0
-msgid "Bonus Grids Setup"
-msgstr "Configuration des grilles de primes"
+msgid "No bonus available yet"
+msgstr "Aucune prime disponible pour le moment"
 
 #. module: sales_bonus_grid
 #: model:ir.model.fields,field_description:sales_bonus_grid.field_res_company__bonus_lock_day

@@ -52,7 +52,7 @@ class SalesBonusGrid(models.Model):
             ('progressive', 'Progressive'),
         ],
         string="Calculation Mode",
-        default=lambda self: self.env.company.bonus_default_mode or 'cliff',
+        default='cliff',
         required=True,
         tracking=True,
     )

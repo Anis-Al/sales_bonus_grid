@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- 1. Personal Menu: Sales -> My Bonus -->
     <menuitem id="menu_sales_bonus_my_bonus"
               name="My Bonus"
               parent="sale.sale_menu_root"
@@ -8,7 +7,6 @@
               groups="sales_team.group_sale_salesman"
               sequence="2"/>
 
-    <!-- 2. Manager Reporting Menu: Sales -> Reporting -> Team Bonuses -->
     <menuitem id="menu_sales_bonus_statement_manager"
               name="Team Bonuses"
               parent="sale.menu_sale_report"
@@ -16,7 +14,6 @@
               groups="sales_team.group_sale_manager"
               sequence="15"/>
 
-    <!-- 3. Configuration Menu: Sales -> Configuration -> Bonus Grids -->
     <menuitem id="menu_sales_bonus_grid_config"
               name="Bonus Grids"
               parent="sale.menu_sale_config"

@@ -16,11 +16,9 @@ class TestSalesBonusGrid(TransactionCase):
         cls.company = cls.env.company
         cls.currency = cls.company.currency_id
 
-        # Sales Groups
         cls.group_salesman = cls.env.ref('sales_team.group_sale_salesman')
         cls.group_manager = cls.env.ref('sales_team.group_sale_manager')
 
-        # Test Users
         cls.salesperson_1 = cls.env['res.users'].create({
             'name': 'Seller Alice',
             'login': 'seller_alice',
@@ -46,14 +44,11 @@ class TestSalesBonusGrid(TransactionCase):
             'company_id': cls.company.id,
         })
 
-        # Test Customer Partner
         cls.customer = cls.env['res.partner'].create({
             'name': 'Acme Corp',
             'company_id': cls.company.id,
         })
 
-        # Test dates — each test method that persists a grid uses a unique month
-        # to avoid UNIQUE(company_id, date_month) constraint conflicts.
         cls.october_month = date(2029, 10, 1)
         cls.november_month = date(2029, 11, 1)
         cls.december_month = date(2029, 12, 1)
@@ -100,7 +95,7 @@ class TestSalesBonusGrid(TransactionCase):
                     'name': 'Test Service',
                     'quantity': 1,
                     'price_unit': amount,
-                    'tax_ids': [(5, 0, 0)],  # No tax for direct untaxed testing
+                    'tax_ids': [(5, 0, 0)],
                 })
             ]
         })
@@ -109,13 +104,10 @@ class TestSalesBonusGrid(TransactionCase):
 
     def test_01_grid_validation_constraints(self):
         """Verify grid constraint checks (first tier 0, ascending thresholds, unique month)."""
-        # Use dedicated months so these intentionally-failing creates cannot
-        # interact with grids from other test methods even in shared transactions.
         MONTH_A = date(2029, 3, 1)
         MONTH_B = date(2029, 4, 1)
         MONTH_C = date(2029, 5, 1)
 
-        # 1. First line must start at 0
         with self.assertRaises(ValidationError):
             self.env['sales.bonus.grid'].create({
                 'company_id': self.company.id,
@@ -125,7 +117,6 @@ class TestSalesBonusGrid(TransactionCase):
                 ]
             })
 
-        # 2. Thresholds must be strictly ascending (duplicate or descending not allowed)
         with self.assertRaises(ValidationError):
             self.env['sales.bonus.grid'].create({
                 'company_id': self.company.id,
@@ -137,7 +128,6 @@ class TestSalesBonusGrid(TransactionCase):
                 ]
             })
 
-        # 3. Progressive mode requires percent bonus
         with self.assertRaises(ValidationError):
             self.env['sales.bonus.grid'].create({
                 'company_id': self.company.id,
@@ -162,7 +152,6 @@ class TestSalesBonusGrid(TransactionCase):
             'grid_id': grid.id,
         })
 
-        # Case A: Revenue = 9,999 -> Tier 1 (Bonus: 0)
         self._create_posted_invoice(self.salesperson_1, date(2029, 10, 5), 9999.0)
         stmt.with_context(force_recompute=True)._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 9999.0)
@@ -173,7 +162,6 @@ class TestSalesBonusGrid(TransactionCase):
         self.assertEqual(stmt.next_bonus, 50.0)
         self.assertAlmostEqual(stmt.progress, 99.99, places=2)
 
-        # Case B: Revenue reaches 10,000 exactly -> Tier 2 (Bonus: 50)
         self._create_posted_invoice(self.salesperson_1, date(2029, 10, 10), 1.0)
         stmt.with_context(force_recompute=True)._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 10000.0)
@@ -184,7 +172,6 @@ class TestSalesBonusGrid(TransactionCase):
         self.assertEqual(stmt.next_bonus, 100.0)
         self.assertEqual(stmt.progress, 0.0)
 
-        # Case C: Revenue reaches 20,000 -> Tier 3 (Bonus: 100, Top Tier)
         self._create_posted_invoice(self.salesperson_1, date(2029, 10, 15), 10000.0)
         stmt.with_context(force_recompute=True)._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 20000.0)
@@ -204,13 +191,11 @@ class TestSalesBonusGrid(TransactionCase):
             'grid_id': grid.id,
         })
 
-        # Post 10,000 invoice and 1,000 refund
         self._create_posted_invoice(self.salesperson_1, date(2029, 10, 10), 10000.0, 'out_invoice')
         self._create_posted_invoice(self.salesperson_1, date(2029, 10, 15), 1000.0, 'out_refund')
 
         stmt.with_context(force_recompute=True)._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 9000.0)
-        # 9,000 is under 10k, so bonus is 0
         self.assertEqual(stmt.bonus, 0.0)
 
     def test_04_progressive_mode_calculation(self):
@@ -236,13 +221,11 @@ class TestSalesBonusGrid(TransactionCase):
             'grid_id': grid.id,
         })
 
-        # Test 15,000 revenue: (10k * 0%) + (5k * 5%) = 250
         self._create_posted_invoice(self.salesperson_1, date(2029, 12, 10), 15000.0)
         stmt.with_context(force_recompute=True)._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 15000.0)
         self.assertEqual(stmt.bonus, 250.0)
 
-        # Add 10,000 more (total 25,000): (10k * 0%) + (10k * 5%) + (5k * 10%) = 0 + 500 + 500 = 1000
         self._create_posted_invoice(self.salesperson_1, date(2029, 12, 20), 10000.0)
         stmt.with_context(force_recompute=True)._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 25000.0)
@@ -252,7 +235,6 @@ class TestSalesBonusGrid(TransactionCase):
         """Test that November inherits October grid when no grid exists for November."""
         oct_grid = self._create_sample_grid_cliff(self.october_month)
 
-        # Fetch grid for November (does not exist yet)
         nov_grid = self.env['sales.bonus.grid'].get_or_create_grid(self.company, self.november_month)
 
         self.assertTrue(nov_grid)
@@ -261,7 +243,6 @@ class TestSalesBonusGrid(TransactionCase):
         self.assertEqual(len(nov_grid.line_ids), 3)
         self.assertEqual(nov_grid.line_ids[1].bonus_value, 50.0)
 
-        # Modifying November grid does not alter October grid
         nov_grid.line_ids[1].write({'bonus_value': 75.0})
         self.assertEqual(oct_grid.line_ids[1].bonus_value, 50.0)
         self.assertEqual(nov_grid.line_ids[1].bonus_value, 75.0)
@@ -281,16 +262,13 @@ class TestSalesBonusGrid(TransactionCase):
         self.assertEqual(stmt.revenue, 10000.0)
         self.assertEqual(stmt.bonus, 50.0)
 
-        # Lock statement as manager
         stmt.with_user(self.manager_user).action_lock()
         self.assertEqual(stmt.state, 'locked')
         self.assertTrue(stmt.locked_on)
         self.assertEqual(stmt.locked_by, self.manager_user)
 
-        # Post another invoice in October
         self._create_posted_invoice(self.salesperson_1, date(2029, 10, 25), 10000.0)
 
-        # Recalculate without bypass
         stmt._compute_revenue_and_bonus()
         self.assertEqual(stmt.revenue, 10000.0)
         self.assertEqual(stmt.bonus, 50.0)
@@ -312,20 +290,16 @@ class TestSalesBonusGrid(TransactionCase):
             'grid_id': grid.id,
         })
 
-        # Alice searches statements -> sees only Alice's statement
         alice_stmts = self.env['sales.bonus.statement'].with_user(self.salesperson_1).search([])
         self.assertIn(stmt_alice, alice_stmts)
         self.assertNotIn(stmt_bob, alice_stmts)
 
-        # Bob searches statements -> sees only Bob's statement
         bob_stmts = self.env['sales.bonus.statement'].with_user(self.salesperson_2).search([])
         self.assertIn(stmt_bob, bob_stmts)
         self.assertNotIn(stmt_alice, bob_stmts)
 
-        # Verify assumption that manager implies salesman (which drives the rule OR logic)
         self.assertTrue(self.manager_user.has_group('sales_team.group_sale_salesman'))
 
-        # Manager Charlie searches statements -> sees both
         mgr_stmts = self.env['sales.bonus.statement'].with_user(self.manager_user).search([])
         self.assertIn(stmt_alice, mgr_stmts)
         self.assertIn(stmt_bob, mgr_stmts)
@@ -342,11 +316,9 @@ class TestSalesBonusGrid(TransactionCase):
         stmt.with_user(self.manager_user).action_lock()
         self.assertEqual(stmt.state, 'locked')
 
-        # Salesperson cannot unlock
         with self.assertRaises(UserError):
             stmt.with_user(self.salesperson_1).action_unlock()
 
-        # Manager unlocks via wizard
         wizard = self.env['sales.bonus.unlock.wizard'].with_user(self.manager_user).create({
             'statement_id': stmt.id,
             'reason': 'Customer billing adjustment approved by management.',
