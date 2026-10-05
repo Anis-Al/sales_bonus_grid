@@ -517,7 +517,7 @@ class SalesBonusStatement(models.Model):
         ], limit=1)
 
         if not statement:
-            grid = self.env['sales.bonus.grid'].get_or_create_grid(company, current_month)
+            grid = not user._is_system() and self.env['sales.bonus.grid'].get_or_create_grid(company, current_month)
             if not grid:
                 return {
                     'type': 'ir.actions.act_window',
@@ -576,7 +576,7 @@ class SalesBonusStatement(models.Model):
                 ('invoice_user_id', '!=', False),
             ], groupby=['invoice_user_id'])
             inv_user_ids = [u[0].id for u in invoice_users if u[0]]
-            all_users = (salespeople | self.env['res.users'].browse(inv_user_ids)).filtered(lambda u: u.active)
+            all_users = (salespeople | self.env['res.users'].browse(inv_user_ids)).filtered(lambda u: u.active and not u._is_system())
 
             for user in all_users:
                 stmt = self.search([

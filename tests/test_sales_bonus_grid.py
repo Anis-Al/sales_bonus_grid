@@ -327,3 +327,19 @@ class TestSalesBonusGrid(TransactionCase):
 
         self.assertEqual(stmt.state, 'open')
         self.assertEqual(stmt.unlock_reason, 'Customer billing adjustment approved by management.')
+
+    def test_09_admin_excluded(self):
+        """System administrators never get a bonus statement."""
+        current_month = fields.Date.today().replace(day=1)
+        self._create_sample_grid_cliff(current_month)
+        admin = self.env.ref('base.user_admin')
+        Statement = self.env['sales.bonus.statement']
+
+        action = Statement.with_user(admin).action_open_my_bonus()
+        self.assertEqual(action['view_mode'], 'list')
+
+        self.company.bonus_auto_refresh = True
+        Statement.cron_refresh_open_statements()
+        stmts = Statement.search([('company_id', '=', self.company.id), ('date_month', '=', current_month)])
+        self.assertNotIn(admin, stmts.user_id)
+        self.assertIn(self.salesperson_1, stmts.user_id)
