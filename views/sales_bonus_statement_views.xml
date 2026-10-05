@@ -51,7 +51,7 @@
 
                     <div class="row g-3 mb-4">
                         <div class="col-md-3 col-sm-6">
-                            <div class="card shadow-sm border-0 bg-light p-3 h-100 rounded-3 text-center">
+                            <div class="card shadow-sm border bg-light p-3 h-100 rounded-3 text-center" style="border-color: #dee2e6 !important;">
                                 <div class="text-uppercase fw-bold text-muted small mb-1">Store Revenue</div>
                                 <div class="fs-3 fw-bold text-dark">
                                     <field name="revenue" widget="monetary" options="{'currency_field': 'currency_id'}"/>
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <div class="card shadow-sm border-0 p-3 h-100 rounded-3 text-center text-white" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);">
+                            <div class="card shadow-sm border p-3 h-100 rounded-3 text-center text-white" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%); border-color: rgba(255,255,255,0.3) !important;">
                                 <div class="text-uppercase fw-semibold small mb-1 opacity-75">Bonus Earned</div>
                                 <div class="fs-2 fw-bolder">
                                     <field name="bonus" widget="monetary" options="{'currency_field': 'currency_id'}"/>
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <div class="card shadow-sm border-0 bg-light p-3 h-100 rounded-3 text-center">
+                            <div class="card shadow-sm border bg-light p-3 h-100 rounded-3 text-center" style="border-color: #dee2e6 !important;">
                                 <div class="text-uppercase fw-bold text-muted small mb-1">Current Tier</div>
                                 <div class="fs-4 fw-bold text-success">
                                     <field name="current_line_id" options="{'no_open': True}"/>
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
-                            <div class="card shadow-sm border-0 bg-light p-3 h-100 rounded-3 text-center">
+                            <div class="card shadow-sm border bg-light p-3 h-100 rounded-3 text-center" style="border-color: #dee2e6 !important;">
                                 <div class="text-uppercase fw-bold text-muted small mb-1">Target Tier</div>
                                 <div class="fs-4 fw-bold text-info">
                                     <span invisible="not next_line_id"><field name="next_line_id" options="{'no_open': True}"/></span>
@@ -142,7 +142,7 @@
                 <field name="user_id"/>
                 <field name="company_id" groups="base.group_multi_company"/>
                 <field name="currency_id" invisible="1" optional="hide"/>
-                <field name="revenue" string="Store Revenue" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="revenue" string="Store Revenue" widget="monetary" options="{'currency_field': 'currency_id'}" optional="hide"/>
                 <field name="bonus" sum="Total Bonus" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                 <field name="current_line_id"/>
                 <field name="next_line_id" optional="show"/>

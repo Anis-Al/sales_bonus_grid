@@ -748,6 +748,7 @@ msgstr "Mois"
 
 #. module: sales_bonus_grid
 #: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_statement__revenue
+#: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_list
 msgid "Store Revenue"
 msgstr "Chiffre d'affaires du magasin"
 
@@ -941,7 +942,7 @@ msgstr "Évaluations"
 #. module: sales_bonus_grid
 #: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
 msgid "Refresh Figures"
-msgstr "Actualiser les chiffres"
+msgstr "Actualiser"
 
 #. module: sales_bonus_grid
 #. odoo-python
@@ -1260,7 +1261,7 @@ msgstr "Borne supérieure"
 #. module: sales_bonus_grid
 #: model_terms:ir.ui.view,arch_db:sales_bonus_grid.view_sales_bonus_statement_my_bonus_form
 msgid "View Counted Invoices"
-msgstr "Voir les factures comptées"
+msgstr "Factures comptées"
 
 #. module: sales_bonus_grid
 #: model:ir.model.fields,field_description:sales_bonus_grid.field_sales_bonus_grid__website_message_ids
